@@ -34,7 +34,9 @@ export function Thumbnail({
   showLivestreamTitle,
 }) {
   const stream = useStream(item.data.streamId);
+  console.log('STREAM:', stream);
   const file = useFile(stream.thumbnailFileId);
+  console.log('FILE:', file);
 
   if (stream.status === StreamStatus.Idle || stream.isDeleted) {
     return <LivestreamIdleThumbnail />;
