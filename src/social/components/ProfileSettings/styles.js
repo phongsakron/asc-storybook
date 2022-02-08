@@ -11,7 +11,6 @@ export const Container = styled.div`
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  min-width: 600px;
 `;
 
 export const PageHeader = styled.div`
