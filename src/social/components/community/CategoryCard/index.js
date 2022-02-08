@@ -2,8 +2,8 @@ import React, { memo, useMemo } from 'react';
 import PropTypes from 'prop-types';
 
 import { FileRepository, ImageSize } from '@amityco/js-sdk';
-import UICategoryCard from './UICategoryCard';
 import useCategory from '~/social/hooks/useCategory';
+import UICategoryCard from './UICategoryCard';
 
 const CategoryCard = ({ categoryId, className, loading, onClick, ...props }) => {
   const { category } = useCategory(categoryId);

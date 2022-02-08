@@ -2,7 +2,6 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useArgs } from '@storybook/client-api';
 
-import UiKitDropdown from '.';
 import { Option, OptionsButton, OptionsIcon } from '~/core/components/OptionMenu/styles';
 import {
   POSITION_BOTTOM,
@@ -10,6 +9,7 @@ import {
   POSITION_TOP,
   POSITION_RIGHT,
 } from '~/helpers/getCssPosition';
+import UiKitDropdown from '.';
 
 export default {
   title: 'Ui Only/Dropdown',

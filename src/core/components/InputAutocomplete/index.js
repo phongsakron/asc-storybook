@@ -10,9 +10,9 @@ import Suggestions from '~/core/components/Suggestions';
 import Highlight from '~/core/components/Highlight';
 import Button from '~/core/components/Button';
 
-import { InputAutocompleteTabs } from './styles';
 import useKeyboard from '~/core/hooks/useKeyboard';
 import useActiveElement from '~/core/hooks/useActiveElement';
+import { InputAutocompleteTabs } from './styles';
 
 const Container = styled.div`
   position: relative;

@@ -30,12 +30,26 @@ const Side = styled.div`
   overflow: auto;
 `;
 
-const Layout = ({ aside, children }) => {
+const Header = styled.div`
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  background: #fff;
+  display: none;
+  @media (max-width: 376px) {
+    display: block;
+  }
+`;
+
+const Layout = ({ aside, header, children }) => {
   return (
-    <Container>
-      <Main>{children}</Main>
-      <Side>{aside}</Side>
-    </Container>
+    <div>
+      <Header>{header}</Header>
+      <Container>
+        <Main>{children}</Main>
+        <Side>{aside}</Side>
+      </Container>
+    </div>
   );
 };
 

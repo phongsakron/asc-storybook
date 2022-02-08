@@ -6,12 +6,12 @@ import withSDK from '~/core/hocs/withSDK';
 
 import useUser from '~/core/hooks/useUser';
 import { useNavigation } from '~/social/providers/NavigationProvider';
-import UIUserInfo from './UIUserInfo';
 import useFollow from '~/core/hooks/useFollow';
 import useFollowCount from '~/core/hooks/useFollowCount';
 import { useAsyncCallback } from '~/core/hooks/useAsyncCallback';
 import { notification } from '~/core/components/Notification';
 import { UserFeedTabs } from '~/social/pages/UserFeed/constants';
+import UIUserInfo from './UIUserInfo';
 
 const UserInfo = ({
   userId,

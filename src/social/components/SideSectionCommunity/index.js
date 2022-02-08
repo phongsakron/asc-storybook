@@ -19,7 +19,6 @@ export const SearchIcon = styled(Search)`
 
 const SideSectionCommunity = ({ shouldHideExplore, children }) => {
   const { onChangePage, page } = useNavigation();
-
   return (
     <SideMenuSection heading={<FormattedMessage id="sidesectioncommunity.community" />}>
       <SideMenuActionItem

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import ConditionalRender from '~/core/components/ConditionalRender';
 import customizableComponent from '~/core/hocs/customization';
 
+import ProgressBar from '~/core/components/ProgressBar';
 import {
   ImageContainer,
   NumberOfHiddenImagesOverlay,
@@ -12,8 +13,6 @@ import {
   CloseIcon,
   CircleButton,
 } from './styles';
-
-import ProgressBar from '~/core/components/ProgressBar';
 
 const Image = ({ image, onClick, onRemove, numberOfHiddenImages }) => {
   const { isNew } = image;

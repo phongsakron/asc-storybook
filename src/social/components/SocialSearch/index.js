@@ -7,14 +7,14 @@ import UserHeader from '~/social/components/UserHeader';
 import customizableComponent from '~/core/hocs/customization';
 import useCommunitiesList from '~/social/hooks/useCommunitiesList';
 import { useNavigation } from '~/social/providers/NavigationProvider';
+import useUserQuery from '~/core/hooks/useUserQuery';
+import ConditionalRender from '~/core/components/ConditionalRender';
 import {
   SocialSearchContainer,
   SocialSearchInput,
   SearchIcon,
   SearchIconContainer,
 } from './styles';
-import useUserQuery from '~/core/hooks/useUserQuery';
-import ConditionalRender from '~/core/components/ConditionalRender';
 
 const communityRenderer = (communities) => (communityName) => {
   const { communityId } = communities.find((item) => item.displayName === communityName) ?? {};
