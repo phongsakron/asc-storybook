@@ -9,7 +9,7 @@ import UiKitSocialSearch from '~/social/components/SocialSearch';
 const SocialSearch = styled(UiKitSocialSearch)`
   background: ${({ theme }) => theme.palette.system.background};
   padding: 0.5rem;
-  @media (max-width: 376px) {
+  @media (max-width: 576px) {
     display: none;
   }
   display: block;

@@ -25,13 +25,13 @@ const ApplicationContainer = styled.div`
 
 const StyledCommunitySideMenu = styled(CommunitySideMenu)`
   min-height: 100%;
-  @media (max-width: 376px) {
+  @media (max-width: 576px) {
     width: 100vw;
   }
 `;
 const StyledSearchSideMenu = styled(SearchSideMenu)`
   min-height: 100%;
-  @media (max-width: 376px) {
+  @media (max-width: 576px) {
     width: 100vw;
   }
 `;
@@ -41,6 +41,7 @@ const Community = () => {
   const [isShowAside, setIsShowAside] = useState(false);
   const [isShowHeader, setIsShowHeader] = useState(true);
   const [asidePage, setAsidePage] = useState('Explore');
+  const [isMobile, setIsMobile] = useState(false);
 
   function getWindowDimensions() {
     const { innerWidth: width, innerHeight: height } = window;
@@ -63,16 +64,20 @@ const Community = () => {
 
   const currPage = useMemo(() => {
     setIsShowHeader(true);
-    setIsShowAside(false);
+    if (isMobile) {
+      setIsShowAside(false);
+    }
     return page.type;
-  }, [page]);
+  }, [isMobile, page.type]);
 
   useEffect(() => {
-    if (windowDimensions.width < 376) {
+    if (windowDimensions.width < 576) {
       // setIsShowHeader(true)
       setIsShowAside(false);
+      setIsMobile(true);
     } else {
       setIsShowAside(true);
+      setIsMobile(false);
     }
   }, [windowDimensions]);
 
