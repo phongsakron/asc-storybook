@@ -1,8 +1,8 @@
 import React from 'react';
 import { useArgs } from '@storybook/client-api';
 
-import StyledSuggestions from '.';
 import UiKitHighlight from '~/core/components/Highlight';
+import StyledSuggestions from '.';
 
 export default {
   title: 'Ui Only/Suggestions',

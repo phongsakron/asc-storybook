@@ -3,6 +3,8 @@ import { FormattedMessage } from 'react-intl';
 import { v4 } from 'uuid';
 import { PollDataType } from '@amityco/js-sdk';
 
+import { PlusIcon } from '~/social/components/UserInfo/styles';
+import Button from '~/core/components/Button';
 import {
   OptionsComposerContainer,
   OptionItemContainer,
@@ -13,8 +15,6 @@ import {
   Counter,
   TitleContainer,
 } from './styles';
-import { PlusIcon } from '~/social/components/UserInfo/styles';
-import Button from '~/core/components/Button';
 
 const MAX_OPTION_TEXT_LENGTH = 200;
 

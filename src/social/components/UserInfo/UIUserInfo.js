@@ -15,6 +15,13 @@ import { FollowersTabs, PENDING_TAB } from '~/social/pages/UserFeed/Followers/co
 import { useSDK } from '~/core/hocs/withSDK';
 import BanIcon from '~/icons/Ban';
 
+import { UserFeedTabs } from '~/social/pages/UserFeed/constants';
+import { confirm } from '~/core/components/Confirm';
+import useUser from '~/core/hooks/useUser';
+import useReport from '~/social/hooks/useReport';
+import { useAsyncCallback } from '~/core/hooks/useAsyncCallback';
+import { notification } from '~/core/components/Notification';
+import useFollowersList from '~/core/hooks/useFollowersList';
 import {
   Avatar,
   Container,
@@ -35,14 +42,6 @@ import {
   ActionButtonContainer,
   ProfileNameWrapper,
 } from './styles';
-
-import { UserFeedTabs } from '~/social/pages/UserFeed/constants';
-import { confirm } from '~/core/components/Confirm';
-import useUser from '~/core/hooks/useUser';
-import useReport from '~/social/hooks/useReport';
-import { useAsyncCallback } from '~/core/hooks/useAsyncCallback';
-import { notification } from '~/core/components/Notification';
-import useFollowersList from '~/core/hooks/useFollowersList';
 
 const UIUserInfo = ({
   userId,

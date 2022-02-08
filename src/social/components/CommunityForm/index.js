@@ -9,12 +9,12 @@ import ConditionalRender from '~/core/components/ConditionalRender';
 import { useAsyncCallback } from '~/core/hooks/useAsyncCallback';
 import useElement from '~/core/hooks/useElement';
 import customizableComponent from '~/core/hocs/customization';
-import AvatarUploader from './AvatarUploader';
 import { isEqual } from '~/helpers';
 
 import { notification } from '~/core/components/Notification';
-import CategorySelector from './CategorySelector';
 import UserSelector from '~/social/components/UserSelector';
+import CategorySelector from './CategorySelector';
+import AvatarUploader from './AvatarUploader';
 
 import {
   Form,

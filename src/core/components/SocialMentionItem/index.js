@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Avatar from '~/core/components/Avatar';
 import BanIcon from '~/icons/Ban';
-import useObserver from '../../hooks/useObserver';
 import useUser from '~/core/hooks/useUser';
+import useObserver from '../../hooks/useObserver';
 
 const Item = styled.div`
   display: flex;

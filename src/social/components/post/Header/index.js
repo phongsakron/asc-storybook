@@ -6,8 +6,8 @@ import { isAdmin, isModerator } from '~/helpers/permissions';
 import usePost from '~/social/hooks/usePost';
 import useCommunity from '~/social/hooks/useCommunity';
 import { useNavigation } from '~/social/providers/NavigationProvider';
-import UIPostHeader from './UIPostHeader';
 import useCommunityOneMember from '~/social/hooks/useCommunityOneMember';
+import UIPostHeader from './UIPostHeader';
 
 const PostHeader = ({ postId, hidePostTarget, loading }) => {
   const { onClickCommunity, onClickUser } = useNavigation();

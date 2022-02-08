@@ -12,9 +12,9 @@ import CommentList from '~/social/components/CommentList';
 import ConditionalRender from '~/core/components/ConditionalRender';
 import { notification } from '~/core/components/Notification';
 import { isModerator } from '~/helpers/permissions';
-import StyledComment from './Comment.styles';
 import useSocialMention from '~/social/hooks/useSocialMention';
 import usePost from '~/social/hooks/usePost';
+import StyledComment from './Comment.styles';
 
 import {
   CommentBlock,

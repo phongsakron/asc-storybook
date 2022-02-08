@@ -8,6 +8,7 @@ import useSocialMention from '~/social/hooks/useSocialMention';
 import withSDK from '~/core/hocs/withSDK';
 import { info } from '~/core/components/Confirm';
 
+import { backgroundImage as UserImage } from '~/icons/User';
 import {
   Avatar,
   CommentComposeBarContainer,
@@ -15,7 +16,6 @@ import {
   AddCommentButton,
 } from './styles';
 
-import { backgroundImage as UserImage } from '~/icons/User';
 import { extractMetadata } from '../../../helpers/utils';
 
 const TOTAL_MENTIONEES_LIMIT = 30;

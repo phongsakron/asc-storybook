@@ -9,6 +9,10 @@ import UiKitSocialSearch from '~/social/components/SocialSearch';
 const SocialSearch = styled(UiKitSocialSearch)`
   background: ${({ theme }) => theme.palette.system.background};
   padding: 0.5rem;
+  @media (max-width: 376px) {
+    display: none;
+  }
+  display: block;
 `;
 
 const CommunitySideMenu = ({ className, activeCommunity }) => (

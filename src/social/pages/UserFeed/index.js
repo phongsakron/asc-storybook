@@ -13,9 +13,9 @@ import Feed from '~/social/components/Feed';
 import ConditionalRender from '~/core/components/ConditionalRender';
 import Followers from '~/social/pages/UserFeed/Followers';
 
-import { tabs, UserFeedTabs } from './constants';
 import { FollowersTabs } from '~/social/pages/UserFeed/Followers/constants';
 import useFollow from '~/core/hooks/useFollow';
+import { tabs, UserFeedTabs } from './constants';
 import { Wrapper } from './styles';
 
 const UserFeed = ({ userId, currentUserId, networkSettings }) => {

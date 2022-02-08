@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
+import Image from '~/core/components/Uploaders/Image';
 import UiKitFileLoader from './Loader';
 import UiKitUploader from './Uploader';
-import Image from '~/core/components/Uploaders/Image';
 
 export default {
   title: 'Ui only/Uploaders',
