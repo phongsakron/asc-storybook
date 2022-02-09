@@ -25,13 +25,13 @@ const ApplicationContainer = styled.div`
 
 const StyledCommunitySideMenu = styled(CommunitySideMenu)`
   min-height: 100%;
-  @media (max-width: 576px) {
+  @media (max-width: 768px) {
     width: 100vw;
   }
 `;
 const StyledSearchSideMenu = styled(SearchSideMenu)`
   min-height: 100%;
-  @media (max-width: 576px) {
+  @media (max-width: 768px) {
     width: 100vw;
   }
 `;
@@ -64,14 +64,15 @@ const Community = () => {
 
   const currPage = useMemo(() => {
     setIsShowHeader(true);
+    setAsidePage('Explore');
     if (isMobile) {
       setIsShowAside(false);
     }
     return page.type;
-  }, [isMobile, page.type]);
+  }, [isMobile, page]);
 
   useEffect(() => {
-    if (windowDimensions.width < 576) {
+    if (windowDimensions.width <= 768) {
       // setIsShowHeader(true)
       setIsShowAside(false);
       setIsMobile(true);

@@ -19,7 +19,9 @@ const CommunityHeaderContainer = styled.a.attrs((props) => props)`
   border-radius: 4px;
   align-items: center;
   color: ${({ theme }) => theme.palette.base.main};
-
+  &:hover {
+    background-color: ${({ theme }) => theme.palette.base.shade4};
+  }
   ${({ $loading }) =>
     !$loading &&
     `&:hover {
