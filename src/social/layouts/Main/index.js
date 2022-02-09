@@ -36,7 +36,7 @@ const Header = styled.div`
   z-index: 9999;
   background: #fff;
   display: none;
-  @media (max-width: 576px) {
+  @media (max-width: 768px) {
     display: block;
   }
 `;
