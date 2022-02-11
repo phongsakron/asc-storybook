@@ -23,8 +23,8 @@ if (process.env.NODE_ENV !== 'production') {
     onChangePage: (type) => console.log(`NavigationContext onChangePage(${type})`),
     onClickCategory: (categoryId) =>
       console.log(`NavigationContext onClickCategory(${categoryId})`),
-    onClickCommunity: (communityId) =>
-      console.log(`NavigationContext onClickCommunity(${communityId})`),
+    onClickCategoryList: () =>
+      console.log(`NavigationContext onClickCategoryList(${communityId})`),
     onClickUser: (userId) => console.log(`NavigationContext onClickUser(${userId})`),
     onCommunityCreated: (communityId) =>
       console.log(`NavigationContext onCommunityCreated(${communityId})`),
@@ -44,6 +44,7 @@ export default ({
   children,
   onChangePage: onChangePageProp,
   onClickCategory,
+  onClickCategoryList,
   onClickCommunity,
   onClickUser,
   onCommunityCreated,
@@ -53,7 +54,6 @@ export default ({
 }) => {
   const [pages, setPages] = useState([{ type: PageTypes.NewsFeed }]);
   const [navigationBlocker, setNavigationBlocker] = useState();
-
   const confirmPageChange = useCallback(async () => {
     if (navigationBlocker) {
       // for more info about this, see https://ekoapp.atlassian.net/browse/UP-3462?focusedCommentId=77155
@@ -75,6 +75,10 @@ export default ({
   const pushPage = useCallback(
     async (newPage) => {
       if (!(await confirmPageChange())) return;
+
+      children
+      console.log("golf", pages);
+      console.log("golf",newPage);
 
       setPages((prevState) => [...prevState, newPage]);
     },
@@ -153,6 +157,23 @@ export default ({
     [onChangePage, onClickCategory, pushPage],
   );
 
+  const handleClickCategoryList = useCallback(
+    () => {
+      console.log(onChangePage);
+      console.log(handleClickCategoryList);
+      // alert("test")
+      const next = {
+        type: PageTypes.CategoryList
+      };
+
+      if (onChangePage) return onChangePage(next);
+      if (onClickCategoryList) return onClickCategoryList();
+
+      pushPage(next);
+    },
+    [onChangePage, onClickCategoryList, pushPage],
+  );
+
   const handleClickUser = useCallback(
     (userId, pageType) => {
       const next = {
@@ -223,6 +244,7 @@ export default ({
       page: pages[pages.length - 1],
       onChangePage: handleChangePage,
       onClickCategory: handleClickCategory,
+      onClickCategoryList: handleClickCategoryList,
       onClickCommunity: handleClickCommunity,
       onClickUser: handleClickUser,
       onCommunityCreated: handleCommunityCreated,

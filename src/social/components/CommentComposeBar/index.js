@@ -83,7 +83,7 @@ const CommentComposeBar = ({ className, userToReply, onSubmit, currentUserId, po
         mentionAllowed
         queryMentionees={queryMentionees}
         onChange={onChange}
-        onKeyPress={(e) => e.key === 'Enter' && addComment()}
+        onKeyPress={e => e.key === 'Enter' && addComment()}
       />
       <AddCommentButton disabled={isEmpty} onClick={addComment}>
         {submitButtonText}

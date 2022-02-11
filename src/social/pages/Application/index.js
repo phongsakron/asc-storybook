@@ -16,6 +16,8 @@ import UserFeedPage from '~/social/pages/UserFeed';
 import CategoryCommunitiesPage from '~/social/pages/CategoryCommunities';
 import CommunityEditPage from '~/social/pages/CommunityEdit';
 import ProfileSettings from '~/social/components/ProfileSettings';
+import CategoriesList from '~/social/pages/CategoriesList';
+
 import { useNavigation } from '~/social/providers/NavigationProvider';
 
 const ApplicationContainer = styled.div`
@@ -53,7 +55,7 @@ const Community = () => {
   const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
 
   // eslint-disable-next-line no-shadow
-  const handleToggleAside = (page) => {
+  const handleToggleAside = page => {
     if (asidePage !== page) {
       setAsidePage(page);
       setIsShowAside(true);
@@ -92,7 +94,7 @@ const Community = () => {
   }, []);
 
   // eslint-disable-next-line no-shadow
-  const asideRender = (page) => {
+  const asideRender = page => {
     if (page === 'Explore') {
       return <StyledCommunitySideMenu activeCommunity={page.communityId} />;
     }
@@ -140,7 +142,9 @@ const Community = () => {
           <CategoryCommunitiesPage categoryId={page.categoryId} />
         )}
 
-        {currPage === PageTypes.UserFeed && <UserFeedPage userId={page.userId} />}
+        {page.type === PageTypes.CategoryList && <CategoriesList />}
+
+        {page.type === PageTypes.UserFeed && <UserFeedPage userId={page.userId} />}
 
         {currPage === PageTypes.UserEdit && <ProfileSettings userId={page.userId} />}
       </MainLayout>

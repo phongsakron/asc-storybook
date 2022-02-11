@@ -1,6 +1,7 @@
 export const PageTypes = {
   Explore: 'explore',
   Category: 'category',
+  CategoryList: 'categorylist',
   NewsFeed: 'newsfeed',
   UserFeed: 'userfeed',
   CommunityFeed: 'communityfeed',

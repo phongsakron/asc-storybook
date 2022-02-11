@@ -126,7 +126,7 @@ const Comment = ({ readonly = false, commentId, currentUserId, userRoles }) => {
   }, [comment?.data?.text, text]);
 
   const onClickReply = () => {
-    setIsReplying((preValue) => !preValue);
+    setIsReplying(preValue => !preValue);
   };
 
   const startEditing = () => {

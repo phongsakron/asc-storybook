@@ -16,8 +16,8 @@ import {
   SearchIconContainer,
 } from './styles';
 
-const communityRenderer = (communities) => (communityName) => {
-  const { communityId } = communities.find((item) => item.displayName === communityName) ?? {};
+const communityRenderer = communities => communityName => {
+  const { communityId } = communities.find(item => item.displayName === communityName) ?? {};
   return (
     <ConditionalRender condition={!!communityId}>
       <CommunityHeader communityId={communityId} />
@@ -25,8 +25,8 @@ const communityRenderer = (communities) => (communityName) => {
   );
 };
 
-const userRenderer = (users) => (userName) => {
-  const { userId, isGlobalBan } = users.find((item) => item.displayName === userName) ?? {};
+const userRenderer = users => userName => {
+  const { userId, isGlobalBan } = users.find(item => item.displayName === userName) ?? {};
   return (
     <ConditionalRender condition={!!userId}>
       <UserHeader userId={userId} isBanned={isGlobalBan} />
@@ -41,11 +41,11 @@ const SocialSearch = ({ className, sticky = false, searchBy }) => {
   const [communities, hasMoreCommunities, loadMoreCommunities] = useCommunitiesList({
     search: value,
   });
-  const handleChange = (newVal) => {
+  const handleChange = newVal => {
     setValue(newVal);
   };
 
-  const getPagination = (activeTab) => {
+  const getPagination = activeTab => {
     const hasMore = activeTab === 'communities' ? hasMoreCommunities : hasMoreUsers;
     const loadMore = activeTab === 'communities' ? loadMoreCommunities : loadMoreUsers;
 
@@ -54,10 +54,10 @@ const SocialSearch = ({ className, sticky = false, searchBy }) => {
 
   const handlePick = (name, activeTab) => {
     if (activeTab === 'communities') {
-      const { communityId } = communities.find((item) => item.displayName === name) ?? {};
+      const { communityId } = communities.find(item => item.displayName === name) ?? {};
       communityId && onClickCommunity(communityId);
     } else if (activeTab === 'accounts') {
-      const { userId } = users.find((item) => item.displayName === name) ?? {};
+      const { userId } = users.find(item => item.displayName === name) ?? {};
       userId && onClickUser(userId);
     }
   };
@@ -72,8 +72,8 @@ const SocialSearch = ({ className, sticky = false, searchBy }) => {
 
   const allItems = useMemo(
     () => ({
-      communities: communities.map((community) => community.displayName),
-      accounts: users.map((community) => community.displayName),
+      communities: communities.map(community => community.displayName),
+      accounts: users.map(community => community.displayName),
     }),
     [communities, users],
   );

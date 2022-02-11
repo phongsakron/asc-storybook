@@ -28,7 +28,7 @@ const Image = ({ image, onClick, onRemove, numberOfHiddenImages }) => {
     return () => clearTimeout(timeout);
   }, [progress, image, isNew]);
 
-  const removeImage = (e) => {
+  const removeImage = e => {
     e.stopPropagation();
     onRemove(image);
   };

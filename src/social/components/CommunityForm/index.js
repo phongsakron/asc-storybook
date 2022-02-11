@@ -90,7 +90,6 @@ function useKeepScrollBottom(ref, deps) {
         ref.current.scrollTo({ top: ref.current.scrollHeight });
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ref.current, scrollBottom, ...deps]);
 }
 
@@ -148,7 +147,7 @@ const CommunityForm = ({
   }, [displayName, description, categoryId, userIds, isPublic, avatarFileId, defaultValues]);
 
   const [validateAndSubmit, submitting] = useAsyncCallback(
-    async (data) => {
+    async data => {
       if (!data.displayName.trim()) {
         setError('displayName', { message: 'Name cannot be empty' });
         return;
@@ -246,7 +245,7 @@ const CommunityForm = ({
             <Controller
               ref={register({ required: 'Category is required' })}
               name="categoryId"
-              render={(props) => <CategorySelector parentContainer={formBodyElement} {...props} />}
+              render={props => <CategorySelector parentContainer={formBodyElement} {...props} />}
               control={control}
               defaultValue=""
             />
@@ -292,7 +291,7 @@ const CommunityForm = ({
               </Label>
               <Controller
                 name="userIds"
-                render={(props) => <UserSelector parentContainer={formBodyElement} {...props} />}
+                render={props => <UserSelector parentContainer={formBodyElement} {...props} />}
                 control={control}
               />
               <ErrorMessage errors={errors} name="userIds" />
@@ -303,7 +302,7 @@ const CommunityForm = ({
       <Footer edit={edit}>
         <ConditionalRender condition={!edit}>
           <Button
-            onClick={(e) => {
+            onClick={e => {
               e.preventDefault();
               onCancel();
             }}

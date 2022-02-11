@@ -109,16 +109,16 @@ const UIUserInfo = ({
   const [pendingUsers] = useFollowersList(currentUserId, FollowRequestStatus.Pending);
   const EditProfileButtonDestop = styled(ActionButtonContainer)`
     visibility: hidden;
-    @media screen and (min-width: 769px){
+    @media screen and (min-width: 769px) {
       visibility: visible;
     }
   `;
   const EditProfileButtonMobile = styled(ActionButtonContainer)`
-    button{
-      width:100%
+    button {
+      width: 100%;
     }
     visibility: visible;
-    @media screen and (min-width: 769px){
+    @media screen and (min-width: 769px) {
       visibility: hidden;
       height: 0;
     }

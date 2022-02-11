@@ -24,7 +24,7 @@ const CommunityCreationModal = ({ isOpen, onClose }) => {
       onOk: onClose,
     });
 
-  const handleSubmit = async (data) => {
+  const handleSubmit = async data => {
     const { communityId } = await promisify(CommunityRepository.createCommunity(data));
     onClose(communityId);
   };

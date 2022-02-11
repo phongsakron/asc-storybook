@@ -22,7 +22,7 @@ const SideSectionMyCommunity = ({ className, activeCommunity }) => {
 
   // const open = () => setIsOpen(true);
 
-  const close = (communityId) => {
+  const close = communityId => {
     setIsOpen(false);
     communityId && onCommunityCreated(communityId);
   };

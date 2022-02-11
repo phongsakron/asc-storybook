@@ -49,8 +49,8 @@ import {
 } from './styles';
 import { MAXIMUM_POST_CHARACTERS, MAXIMUM_POST_MENTIONEES } from './constants';
 
-const communityFetcher = (id) => () => CommunityRepository.communityForId(id);
-const userFetcher = (id) => () => new UserRepository().userForId(id);
+const communityFetcher = id => () => CommunityRepository.communityForId(id);
+const userFetcher = id => () => new UserRepository().userForId(id);
 
 const mentioneeCommunityFetcher = (communityId, search) =>
   CommunityRepository.getCommunityMembers({
@@ -139,15 +139,15 @@ const PostCreatorBar = ({
     }
 
     if (postImages.length) {
-      attachments.push(...postImages.map((i) => ({ fileId: i.fileId, type: FileType.Image })));
+      attachments.push(...postImages.map(i => ({ fileId: i.fileId, type: FileType.Image })));
     }
 
     if (postVideos.length) {
-      attachments.push(...postVideos.map((i) => ({ fileId: i.fileId, type: FileType.Video })));
+      attachments.push(...postVideos.map(i => ({ fileId: i.fileId, type: FileType.Video })));
     }
 
     if (postFiles.length) {
-      attachments.push(...postFiles.map((i) => ({ fileId: i.fileId, type: FileType.File })));
+      attachments.push(...postFiles.map(i => ({ fileId: i.fileId, type: FileType.File })));
     }
 
     if (mentionees.length) {
@@ -255,7 +255,7 @@ const PostCreatorBar = ({
         liveCollection = UserRepository.queryUsers({ keyword });
       }
 
-      liveCollection.on('dataUpdated', (models) => {
+      liveCollection.on('dataUpdated', models => {
         cb(formatMentionees(models));
       });
     },

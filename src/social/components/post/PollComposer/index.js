@@ -51,13 +51,10 @@ const PollComposer = ({
   onSubmit = () => {},
   setDirtyExternal = () => {},
 }) => {
-  const {
-    text,
-    markup,
-    mentions,
-    queryMentionees,
-    onChange: mentionOnChange,
-  } = useSocialMention({ targetId, targetType });
+  const { text, markup, mentions, queryMentionees, onChange: mentionOnChange } = useSocialMention({
+    targetId,
+    targetType,
+  });
 
   const defaultValues = {
     question: '',
@@ -85,7 +82,7 @@ const PollComposer = ({
 
   useEffect(() => setDirtyExternal(isDirty), [isDirty, setDirtyExternal]);
 
-  const [validateAndSubmit, submitting] = useAsyncCallback(async (data) => {
+  const [validateAndSubmit, submitting] = useAsyncCallback(async data => {
     if (mentions?.length > MAXIMUM_MENTIONEES) {
       return info({
         title: <FormattedMessage id="pollComposer.unableToMention" />,
@@ -218,7 +215,7 @@ const PollComposer = ({
                   <Controller
                     ref={register({ required: 'Answer type is required' })}
                     name="answerType"
-                    render={(props) => (
+                    render={props => (
                       <AnswerTypeSelector parentContainer={formBodyElement} {...props} />
                     )}
                     control={control}
@@ -241,7 +238,7 @@ const PollComposer = ({
                   <Controller
                     ref={register()}
                     name="closedIn"
-                    render={(props) => (
+                    render={props => (
                       <InputCounter
                         {...props}
                         onlyPositiveNumber
@@ -258,7 +255,7 @@ const PollComposer = ({
         </FormBody>
         <Footer>
           <Button
-            onClick={(e) => {
+            onClick={e => {
               e.preventDefault();
               onCancel();
             }}

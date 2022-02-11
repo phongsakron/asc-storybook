@@ -9,7 +9,7 @@ import Avatar from '~/core/components/Avatar';
 import CommunityName from '~/social/components/community/Name';
 import { backgroundImage as CommunityImage } from '~/icons/Community';
 
-const CommunityHeaderContainer = styled.a.attrs((props) => props)`
+const CommunityHeaderContainer = styled.a.attrs(props => props)`
   display: grid;
   grid-template-areas: 'avatar title' 'avatar children';
   grid-template-columns: min-content auto;
