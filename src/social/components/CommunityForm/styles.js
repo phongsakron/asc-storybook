@@ -13,7 +13,7 @@ const ErrorMessageWrapper = styled.div`
   ${({ theme }) => theme.typography.caption}
 `;
 
-export const ErrorMessage = (props) => <FormErrorMessage as={ErrorMessageWrapper} {...props} />;
+export const ErrorMessage = props => <FormErrorMessage as={ErrorMessageWrapper} {...props} />;
 
 export const InputPlaceholder = styled.span`
   color: ${({ theme }) => theme.palette.base.shade1};
@@ -94,7 +94,7 @@ export const Radio = styled.input.attrs({ type: 'radio' })`
 `;
 
 export const Form = styled.form`
-  min-width: 520px;
+  width: 100%;
 `;
 
 export const SubmitButton = styled(PrimaryButton).attrs({

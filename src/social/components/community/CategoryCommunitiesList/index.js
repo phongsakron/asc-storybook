@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
 import { useNavigation } from '~/social/providers/NavigationProvider';
-import { Grid, ListEmptyState } from './styles';
 import useCommunitiesList from '~/social/hooks/useCommunitiesList';
 import PaginatedList from '~/core/components/PaginatedList';
 import EmptyFeedIcon from '~/icons/EmptyFeed';
 import CommunityCard from '~/social/components/community/Card';
+import { Grid, ListEmptyState } from './styles';
 
 const CategoryCommunitiesList = ({ categoryId }) => {
   const { onClickCommunity } = useNavigation();

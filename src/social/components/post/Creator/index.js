@@ -26,13 +26,13 @@ import { backgroundImage as UserImage } from '~/icons/User';
 import { backgroundImage as CommunityImage } from '~/icons/Community';
 import { useNavigation } from '~/social/providers/NavigationProvider';
 
+import { formatMentionees } from '~/helpers/utils';
+import PollModal from '~/social/components/post/PollComposer/PollModal';
 import PostTargetSelector from './components/PostTargetSelector';
 import UploaderButtons from './components/UploaderButtons';
 import ImagesUploaded from './components/ImagesUploaded';
 import VideosUploaded from './components/VideosUploaded';
 import FilesUploaded from './components/FilesUploaded';
-
-import { formatMentionees } from '~/helpers/utils';
 
 import { createPost, showPostCreatedNotification } from './utils';
 import {
@@ -47,11 +47,10 @@ import {
   PollIcon,
   PollIconContainer,
 } from './styles';
-import PollModal from '~/social/components/post/PollComposer/PollModal';
 import { MAXIMUM_POST_CHARACTERS, MAXIMUM_POST_MENTIONEES } from './constants';
 
-const communityFetcher = (id) => () => CommunityRepository.communityForId(id);
-const userFetcher = (id) => () => new UserRepository().userForId(id);
+const communityFetcher = id => () => CommunityRepository.communityForId(id);
+const userFetcher = id => () => new UserRepository().userForId(id);
 
 const mentioneeCommunityFetcher = (communityId, search) =>
   CommunityRepository.getCommunityMembers({
@@ -140,15 +139,15 @@ const PostCreatorBar = ({
     }
 
     if (postImages.length) {
-      attachments.push(...postImages.map((i) => ({ fileId: i.fileId, type: FileType.Image })));
+      attachments.push(...postImages.map(i => ({ fileId: i.fileId, type: FileType.Image })));
     }
 
     if (postVideos.length) {
-      attachments.push(...postVideos.map((i) => ({ fileId: i.fileId, type: FileType.Video })));
+      attachments.push(...postVideos.map(i => ({ fileId: i.fileId, type: FileType.Video })));
     }
 
     if (postFiles.length) {
-      attachments.push(...postFiles.map((i) => ({ fileId: i.fileId, type: FileType.File })));
+      attachments.push(...postFiles.map(i => ({ fileId: i.fileId, type: FileType.File })));
     }
 
     if (mentionees.length) {
@@ -256,7 +255,7 @@ const PostCreatorBar = ({
         liveCollection = UserRepository.queryUsers({ keyword });
       }
 
-      liveCollection.on('dataUpdated', (models) => {
+      liveCollection.on('dataUpdated', models => {
         cb(formatMentionees(models));
       });
     },

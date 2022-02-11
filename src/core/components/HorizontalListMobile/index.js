@@ -1,10 +1,8 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { PageTypes } from '~/social/constants';
 import useMeasure from 'react-use/lib/useMeasure';
 import useScroll from 'react-use/lib/useScroll';
 import Button from '~/core/components/Button';
-import ChevronLeftIcon from '~/icons/ChevronLeft';
 import ChevronRightIcon from '~/icons/ChevronRight';
 import { useNavigation } from '~/social/providers/NavigationProvider';
 
@@ -70,8 +68,6 @@ const StretchedList = styled.div`
     )} );
 `;
 
-
-
 function HorizontalListMobile({
   title = '',
   children,
@@ -84,21 +80,13 @@ function HorizontalListMobile({
   const containerRef = useRef(null);
   const { x: scrollPosition } = useScroll(containerRef);
   const [wrapperRef, { width }] = useMeasure();
-  const [page, setPage] = useState(0);
+  const [page] = useState(0);
   console.log(children);
   const contentWidth = useMemo(() => containerRef.current?.scrollWidth ?? 0, [
     containerRef.current?.scrollWidth,
   ]);
 
   const hasMultiPage = useMemo(() => contentWidth > width, [contentWidth, width]);
-
-  const isLastPage = useMemo(() => scrollPosition >= contentWidth - width, [
-    scrollPosition,
-    contentWidth,
-    width,
-  ]);
-
-  const isFirstPage = useMemo(() => scrollPosition === 0, [scrollPosition]);
 
   useEffect(
     () =>

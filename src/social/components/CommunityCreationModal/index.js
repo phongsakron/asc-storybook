@@ -7,8 +7,8 @@ import Modal from '~/core/components/Modal';
 import { confirm } from '~/core/components/Confirm';
 import customizableComponent from '~/core/hocs/customization';
 import promisify from '~/helpers/promisify';
-import { CommunityForm } from './styles';
 import withSDK from '~/core/hocs/withSDK';
+import { CommunityForm } from './styles';
 
 const CommunityCreationModal = ({ isOpen, onClose }) => {
   const { formatMessage } = useIntl();
@@ -24,7 +24,7 @@ const CommunityCreationModal = ({ isOpen, onClose }) => {
       onOk: onClose,
     });
 
-  const handleSubmit = async (data) => {
+  const handleSubmit = async data => {
     const { communityId } = await promisify(CommunityRepository.createCommunity(data));
     onClose(communityId);
   };

@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { PostDataType } from '@amityco/js-sdk';
 
+import File from '~/core/components/Uploaders/File';
+import Image from '~/core/components/Uploaders/Image';
+import Video from '~/core/components/Uploaders/Video';
 import TextContent from './text';
 import ImageContentList from './image';
 import VideoContentList from './video';
 import FileContentList from './file';
-import File from '~/core/components/Uploaders/File';
-import Image from '~/core/components/Uploaders/Image';
-import Video from '~/core/components/Uploaders/Video';
 
 const RENDERERS = {
   [PostDataType.TextPost]: TextContent,

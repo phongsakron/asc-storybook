@@ -4,6 +4,15 @@ import { PollAnswerType } from '@amityco/js-sdk';
 import { useForm, Controller } from 'react-hook-form';
 import useSocialMention from '~/social/hooks/useSocialMention';
 
+import OptionsComposer from '~/social/components/post/PollComposer/OptionsComposer';
+import { useAsyncCallback } from '~/core/hooks/useAsyncCallback';
+import InputCounter, { COUNTER_VALUE_PLACEHOLDER } from '~/core/components/InputCounter';
+import AnswerTypeSelector from '~/social/components/post/PollComposer/AnswerTypeSelector';
+import useElement from '~/core/hooks/useElement';
+import Button from '~/core/components/Button';
+import { extractMetadata } from '~/helpers/utils';
+import { MAXIMUM_MENTIONEES } from '~/social/constants';
+import { info } from '~/core/components/Confirm';
 import {
   PollComposerContainer,
   Form,
@@ -22,16 +31,6 @@ import {
   LabelWrapper,
   MentionTextInput,
 } from './styles';
-
-import OptionsComposer from '~/social/components/post/PollComposer/OptionsComposer';
-import { useAsyncCallback } from '~/core/hooks/useAsyncCallback';
-import InputCounter, { COUNTER_VALUE_PLACEHOLDER } from '~/core/components/InputCounter';
-import AnswerTypeSelector from '~/social/components/post/PollComposer/AnswerTypeSelector';
-import useElement from '~/core/hooks/useElement';
-import Button from '~/core/components/Button';
-import { extractMetadata } from '~/helpers/utils';
-import { MAXIMUM_MENTIONEES } from '~/social/constants';
-import { info } from '~/core/components/Confirm';
 
 const MAX_QUESTION_LENGTH = 500;
 const MIN_OPTIONS_AMOUNT = 2;
@@ -52,13 +51,10 @@ const PollComposer = ({
   onSubmit = () => {},
   setDirtyExternal = () => {},
 }) => {
-  const {
-    text,
-    markup,
-    mentions,
-    queryMentionees,
-    onChange: mentionOnChange,
-  } = useSocialMention({ targetId, targetType });
+  const { text, markup, mentions, queryMentionees, onChange: mentionOnChange } = useSocialMention({
+    targetId,
+    targetType,
+  });
 
   const defaultValues = {
     question: '',
@@ -86,7 +82,7 @@ const PollComposer = ({
 
   useEffect(() => setDirtyExternal(isDirty), [isDirty, setDirtyExternal]);
 
-  const [validateAndSubmit, submitting] = useAsyncCallback(async (data) => {
+  const [validateAndSubmit, submitting] = useAsyncCallback(async data => {
     if (mentions?.length > MAXIMUM_MENTIONEES) {
       return info({
         title: <FormattedMessage id="pollComposer.unableToMention" />,
@@ -219,7 +215,7 @@ const PollComposer = ({
                   <Controller
                     ref={register({ required: 'Answer type is required' })}
                     name="answerType"
-                    render={(props) => (
+                    render={props => (
                       <AnswerTypeSelector parentContainer={formBodyElement} {...props} />
                     )}
                     control={control}
@@ -242,7 +238,7 @@ const PollComposer = ({
                   <Controller
                     ref={register()}
                     name="closedIn"
-                    render={(props) => (
+                    render={props => (
                       <InputCounter
                         {...props}
                         onlyPositiveNumber
@@ -259,7 +255,7 @@ const PollComposer = ({
         </FormBody>
         <Footer>
           <Button
-            onClick={(e) => {
+            onClick={e => {
               e.preventDefault();
               onCancel();
             }}

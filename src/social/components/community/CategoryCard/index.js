@@ -2,26 +2,34 @@ import React, { memo, useMemo, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { FileRepository, ImageSize } from '@amityco/js-sdk';
-import UICategoryCard from './UICategoryCard';
 import useCategory from '~/social/hooks/useCategory';
-import { margin } from 'polished';
+
+import UICategoryCard from './UICategoryCard';
 
 const CategoryCard = ({ categoryId, className, loading, onClick, ...props }) => {
   const { category } = useCategory(categoryId);
+
+  function getWindowDimensions() {
+    const { innerWidth: width, innerHeight: height } = window;
+    return {
+      width,
+      height,
+    };
+  }
 
   const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
 
   let mentionStyle = {
     minWidth: '130px',
     minHeight: '120px',
-    margin: 'auto'
+    margin: 'auto',
   };
-  
+
   if (windowDimensions.width < 376) {
     mentionStyle = {
       minWidth: '130px',
       minHeight: '120px',
-      margin: 'auto'
+      margin: 'auto',
     };
   } else {
     mentionStyle = {
@@ -30,9 +38,6 @@ const CategoryCard = ({ categoryId, className, loading, onClick, ...props }) => 
       margin: 'auto',
     };
   }
-  
-
-
 
   // TODO: this is temporary - we should use file.fileUrl when supported.
   const fileUrl = useMemo(
@@ -44,14 +49,6 @@ const CategoryCard = ({ categoryId, className, loading, onClick, ...props }) => 
       }),
     [category.avatarFileId],
   );
-
-  function getWindowDimensions() {
-    const { innerWidth: width, innerHeight: height } = window;
-    return {
-      width,
-      height,
-    };
-  }
 
   useEffect(() => {
     function handleResize() {
@@ -67,7 +64,7 @@ const CategoryCard = ({ categoryId, className, loading, onClick, ...props }) => 
       mentionStyle = {
         minWidth: '130px',
         minHeight: '120px',
-        margin: 'auto'
+        margin: 'auto',
       };
     } else {
       mentionStyle = {

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import UiKitHeaders from '.';
 import UiKitSideBar from '~/core/components/SideBar';
+import UiKitHeaders from '.';
 
 export default {
   title: 'Ui Only/Layout',

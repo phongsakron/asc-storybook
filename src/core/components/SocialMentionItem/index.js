@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Avatar from '~/core/components/Avatar';
 import BanIcon from '~/icons/Ban';
-import useObserver from '../../hooks/useObserver';
 import useUser from '~/core/hooks/useUser';
+import useObserver from '../../hooks/useObserver';
 
 const Item = styled.div`
   display: flex;
@@ -42,7 +42,7 @@ const SocialMentionItem = ({ id, focused, isLastItem, loadMore = () => {}, rootE
         ref={targetRef}
         focused={focused}
         isBanned={user.isGlobalBan}
-        onMouseEnter={(e) => onMouseEnter(e, user.isGlobalBan)}
+        onMouseEnter={e => onMouseEnter(e, user.isGlobalBan)}
       >
         <Avatar avatar={file.fileUrl} showOverlay={user.isGlobalBan} />
         <div css="margin-left: 10px;">{user.displayName}</div>
@@ -54,7 +54,7 @@ const SocialMentionItem = ({ id, focused, isLastItem, loadMore = () => {}, rootE
     <Item
       focused={focused}
       isBanned={user.isGlobalBan}
-      onMouseEnter={(e) => onMouseEnter(e, user.isGlobalBan)}
+      onMouseEnter={e => onMouseEnter(e, user.isGlobalBan)}
     >
       <Avatar avatar={file.fileUrl} />
       <div css="margin-left: 10px;">{user.displayName}</div>
