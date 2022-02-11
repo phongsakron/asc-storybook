@@ -14,8 +14,9 @@ import UserFeedPage from '~/social/pages/UserFeed';
 import CategoryCommunitiesPage from '~/social/pages/CategoryCommunities';
 import CommunityEditPage from '~/social/pages/CommunityEdit';
 import ProfileSettings from '~/social/components/ProfileSettings';
-import { useNavigation } from '~/social/providers/NavigationProvider';
+import CategoriesList from '~/social/pages/CategoriesList';
 
+import { useNavigation } from '~/social/providers/NavigationProvider';
 const ApplicationContainer = styled.div`
   height: 100%;
   width: 100%;
@@ -45,6 +46,11 @@ const Community = () => {
 
         {page.type === PageTypes.Category && (
           <CategoryCommunitiesPage categoryId={page.categoryId} />
+        )}
+
+        {page.type === PageTypes.CategoryList && (
+          <CategoriesList />
+
         )}
 
         {page.type === PageTypes.UserFeed && <UserFeedPage userId={page.userId} />}

@@ -143,6 +143,7 @@ UiKitProvider.propTypes = {
   actionHandlers: PropTypes.shape({
     onChangePage: PropTypes.func,
     onClickCategory: PropTypes.func,
+    onClickCategoryList: PropTypes.func,
     onClickCommunity: PropTypes.func,
     onClickUser: PropTypes.func,
     onCommunityCreated: PropTypes.func,
