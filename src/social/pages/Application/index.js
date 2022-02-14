@@ -20,6 +20,7 @@ import { useNavigation } from '~/social/providers/NavigationProvider';
 
 const ApplicationContainer = styled.div`
   height: 100%;
+  overflow: auto;
   width: 100%;
 `;
 
@@ -31,9 +32,15 @@ const StyledCommunitySideMenu = styled(CommunitySideMenu)`
 `;
 const StyledSearchSideMenu = styled(SearchSideMenu)`
   min-height: 100%;
+  overflow: auto;
   @media (max-width: 768px) {
     width: 100vw;
   }
+`;
+
+const ContentsLayout = styled.div`
+  max-height: 100vh;
+  overflow: auto;
 `;
 
 const Community = () => {
@@ -124,25 +131,30 @@ const Community = () => {
         }
         aside={isShowAside ? asideRender(asidePage) : <div />}
       >
-        {currPage === PageTypes.Explore && <ExplorePage />}
+        <ContentsLayout>
+          {currPage === PageTypes.Explore && <ExplorePage />}
 
-        {currPage === PageTypes.NewsFeed && <NewsFeedPage />}
+          {currPage === PageTypes.NewsFeed && <NewsFeedPage />}
 
-        {currPage === PageTypes.CommunityFeed && (
-          <CommunityFeedPage communityId={page.communityId} isNewCommunity={page.isNewCommunity} />
-        )}
+          {currPage === PageTypes.CommunityFeed && (
+            <CommunityFeedPage
+              communityId={page.communityId}
+              isNewCommunity={page.isNewCommunity}
+            />
+          )}
 
-        {currPage === PageTypes.CommunityEdit && (
-          <CommunityEditPage communityId={page.communityId} tab={page.tab} />
-        )}
+          {currPage === PageTypes.CommunityEdit && (
+            <CommunityEditPage communityId={page.communityId} tab={page.tab} />
+          )}
 
-        {currPage === PageTypes.Category && (
-          <CategoryCommunitiesPage categoryId={page.categoryId} />
-        )}
+          {currPage === PageTypes.Category && (
+            <CategoryCommunitiesPage categoryId={page.categoryId} />
+          )}
 
-        {currPage === PageTypes.UserFeed && <UserFeedPage userId={page.userId} />}
+          {currPage === PageTypes.UserFeed && <UserFeedPage userId={page.userId} />}
 
-        {currPage === PageTypes.UserEdit && <ProfileSettings userId={page.userId} />}
+          {currPage === PageTypes.UserEdit && <ProfileSettings userId={page.userId} />}
+        </ContentsLayout>
       </MainLayout>
     </ApplicationContainer>
   );
