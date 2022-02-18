@@ -1,6 +1,6 @@
 {
   "name": "@amityco/ui-kit",
-  "version": "2.7.013",
+  "version": "2.7.014",
   "engines": {
     "node": ">=16",
     "npm": ">=7"
