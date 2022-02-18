@@ -133,6 +133,10 @@ const StyledComment = ({
             <OptionMenu options={options} pullRight={false} align={POSITION_LEFT} />
           </InteractionBar>
         </ConditionalRender>
+
+        <ConditionalRender condition={!canReply}>
+          <div css="margin-top: 10px;" />
+        </ConditionalRender>
       </Content>
     </>
   );
