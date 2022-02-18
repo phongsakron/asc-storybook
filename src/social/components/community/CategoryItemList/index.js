@@ -1,6 +1,4 @@
-import { CommunitySortingMethod } from '@amityco/js-sdk';
 import React, { memo, useMemo } from 'react';
-import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
 import { useNavigation } from '~/social/providers/NavigationProvider';
@@ -16,8 +14,6 @@ const CategoriesItemList = () => {
 
   const [categories, hasMore, loadMore, loading, loadingMore] = useCategories({ isDeleted: false });
 
-  console.log("golftest",[categories, hasMore, loadMore, loading, loadingMore]);
-  
   const items = useMemo(() => {
     function getLoadingItems() {
       return new Array(6).fill(1).map((x, index) => ({ categoryId: index, skeleton: true }));
@@ -34,8 +30,7 @@ const CategoriesItemList = () => {
     return [...categories, ...getLoadingItems()];
   }, [categories, loading, loadingMore]);
 
-  return (
-    (items.length > 0 ) ? (
+  return items.length > 0 ? (
     <PaginatedList
       items={items}
       hasMore={hasMore}
@@ -57,14 +52,12 @@ const CategoriesItemList = () => {
         )
       }
     </PaginatedList>
-    ) : (
-      <ListEmptyState
+  ) : (
+    <ListEmptyState
       icon={<EmptyFeedIcon width={48} height={48} />}
       title={<FormattedMessage id="CategoryCommunitiesList.emptyTitle" />}
       description={<FormattedMessage id="CategoryCommunitiesList.emptyDescription" />}
     />
-      )
-
   );
 };
 

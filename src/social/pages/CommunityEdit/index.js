@@ -4,13 +4,12 @@ import { ImageSize, FileRepository } from '@amityco/js-sdk';
 
 import ConditionalRender from '~/core/components/ConditionalRender';
 import CommunityMembers from '~/social/components/CommunityMembers';
-import CommunityPermissions from '~/social/components/CommunityPermissions';
 import CommunityForm from '~/social/components/CommunityForm';
 import { AddMemberModal } from '~/social/components/AddMemberModal';
 import { PageTypes } from '~/social/constants';
 import useCommunity from '~/social/hooks/useCommunity';
 import useCommunityMembers from '~/social/hooks/useCommunityMembers';
-import PageLayout from '~/social/layouts/Page';
+import PageLeftAside from '~/social/layouts/PageLeftAside';
 
 import CommunityEditHeader from '~/social/components/community/EditPageHeader';
 import { useNavigation } from '~/social/providers/NavigationProvider';
@@ -33,7 +32,7 @@ const CommunityEditPage = ({ communityId, tab }) => {
 
   const handleReturnToCommunity = () => onClickCommunity(communityId);
 
-  const handleEditCommunity = async (data) => {
+  const handleEditCommunity = async data => {
     await updateCommunity(data);
     handleReturnToCommunity();
   };
@@ -82,7 +81,7 @@ const CommunityEditPage = ({ communityId, tab }) => {
   );
 
   return (
-    <PageLayout
+    <PageLeftAside
       aside={renderAsideComponent()}
       header={
         <CommunityEditHeader
@@ -96,15 +95,13 @@ const CommunityEditPage = ({ communityId, tab }) => {
       }
     >
       <ConditionalRender condition={activeTab === PageTabs.EDIT_PROFILE && !!community.communityId}>
-        <CommunityForm community={community} edit onSubmit={(data) => handleEditCommunity(data)} />
+        <CommunityForm community={community} edit onSubmit={data => handleEditCommunity(data)} />
       </ConditionalRender>
 
       <ConditionalRender condition={activeTab === PageTabs.MEMBERS}>
         <CommunityMembers communityId={communityId} />
       </ConditionalRender>
-
-      {activeTab === PageTabs.PERMISSIONS && <CommunityPermissions communityId={communityId} />}
-    </PageLayout>
+    </PageLeftAside>
   );
 };
 
