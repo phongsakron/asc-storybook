@@ -20,6 +20,7 @@ import { useNavigation } from '~/social/providers/NavigationProvider';
 
 const ApplicationContainer = styled.div`
   height: 100%;
+  max-height: 100vh;
   overflow: auto;
   width: 100%;
 `;
