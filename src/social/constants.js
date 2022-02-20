@@ -8,6 +8,16 @@ export const PageTypes = {
   UserEdit: 'useredit',
 };
 
+export const PageTypesToTitle = {
+  [PageTypes.Explore]: 'Explore',
+  [PageTypes.Category]: 'Category',
+  [PageTypes.NewsFeed]: 'News Feed',
+  [PageTypes.UserFeed]: 'User Feed',
+  [PageTypes.CommunityFeed]: 'Community Feed',
+  [PageTypes.CommunityEdit]: 'Community Edit',
+  [PageTypes.UserEdit]: 'User Edit',
+};
+
 export const MemberRoles = Object.freeze({
   MEMBER: 'member',
   COMMUNITY_MODERATOR: 'community-moderator',
