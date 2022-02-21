@@ -13,7 +13,7 @@ const PollModal = ({ targetId, targetType, onClose, onCreatePoll }) => {
 
   const handleSubmit = async (data, mentionees, metadata) => {
     const { pollId } = await promisify(PollRepository.createPoll(data));
-    await onCreatePoll(pollId, data.question, mentionees, metadata);
+    await onCreatePoll(pollId, data.question, mentionees, { ...metadata, type: 'poll' });
     onClose();
   };
 

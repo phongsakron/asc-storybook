@@ -10,7 +10,7 @@ import {
   FileType,
   ImageSize,
 } from '@amityco/js-sdk';
-
+import debounce from 'lodash/debounce';
 import { info } from '~/core/components/Confirm';
 import { useAsyncCallback } from '~/core/hooks/useAsyncCallback';
 
@@ -33,7 +33,7 @@ import UploaderButtons from './components/UploaderButtons';
 import ImagesUploaded from './components/ImagesUploaded';
 import VideosUploaded from './components/VideosUploaded';
 import FilesUploaded from './components/FilesUploaded';
-
+import { useConfig } from '~/social/providers/ConfigProvider';
 import { createPost, showPostCreatedNotification } from './utils';
 import {
   Avatar,
@@ -46,6 +46,8 @@ import {
   PollButton,
   PollIcon,
   PollIconContainer,
+  UrlPreviewContainer,
+  UrlPreviewStyled,
 } from './styles';
 import { MAXIMUM_POST_CHARACTERS, MAXIMUM_POST_MENTIONEES } from './constants';
 
@@ -84,6 +86,7 @@ const PostCreatorBar = ({
 }) => {
   const { setNavigationBlocker } = useNavigation();
   const { user } = useUser(currentUserId);
+  const { apiUrlPreview } = useConfig();
 
   // default to me
   if (targetType === PostTargetType.GlobalFeed || targetType === PostTargetType.MyFeed) {
@@ -128,26 +131,44 @@ const PostCreatorBar = ({
   const [setError] = useErrorNotification();
   const [mentionees, setMentionees] = useState([]);
 
+  // Url preview
+  const [urlPreview, setUrlPreview] = useState({
+    title: null,
+    description: null,
+    siteName: null,
+    hostname: null,
+    imgUrl: null,
+  });
+  const [currentUrl, setCurrentUrl] = useState('');
+
   const [onCreatePost, creating] = useAsyncCallback(async () => {
     const data = {};
     const attachments = [];
     const postMentionees = {};
     const metadata = {};
+    metadata.type = 'text';
 
     if (postText) {
       data.text = plainText;
+      if (apiUrlPreview) {
+        metadata.urlPreview = urlPreview;
+      }
+      metadata.type = 'text';
     }
 
     if (postImages.length) {
       attachments.push(...postImages.map((i) => ({ fileId: i.fileId, type: FileType.Image })));
+      metadata.type = 'image';
     }
 
     if (postVideos.length) {
       attachments.push(...postVideos.map((i) => ({ fileId: i.fileId, type: FileType.Video })));
+      metadata.type = 'video';
     }
 
     if (postFiles.length) {
       attachments.push(...postFiles.map((i) => ({ fileId: i.fileId, type: FileType.File })));
+      metadata.type = 'file';
     }
 
     if (mentionees.length) {
@@ -164,7 +185,7 @@ const PostCreatorBar = ({
       ...target,
       data,
       attachments,
-      metadata: {},
+      metadata,
     };
 
     if (postMentionees.type && postMentionees.userIds.length > 0) {
@@ -182,7 +203,6 @@ const PostCreatorBar = ({
       metadata.markupText = postText;
       createPostParams.metadata = metadata;
     }
-
     const post = await createPost(createPostParams);
 
     onCreateSuccess(post.postId);
@@ -194,7 +214,14 @@ const PostCreatorBar = ({
     setIncomingVideos([]);
     setIncomingFiles([]);
     setMentionees([]);
-
+    setUrlPreview({
+      title: null,
+      description: null,
+      siteName: null,
+      hostname: null,
+      imgUrl: null,
+    });
+    setCurrentUrl('');
     showPostCreatedNotification(post, model);
   }, [postText, postImages, postVideos, postFiles, target, onCreateSuccess, model, mentionees]);
 
@@ -261,6 +288,44 @@ const PostCreatorBar = ({
     },
     [mentionText, model?.isPublic, creatorTargetId, creatorTargetType],
   );
+
+  useEffect(() => {
+    const getUrlPreviewDetail = (url) => {
+      return fetch(`${apiUrlPreview}?url=${url}`);
+    };
+    const doGetDetail = (url) => {
+      getUrlPreviewDetail(url)
+        .then((data) => data.json())
+        .then((data) => {
+          setUrlPreview({
+            title: data.title,
+            description: data.description,
+            siteName: data.siteName,
+            hostname: data.url,
+            imgUrl: data.images[0] ?? null,
+          });
+        });
+    };
+
+    if (currentUrl && apiUrlPreview) {
+      doGetDetail(currentUrl);
+    } else {
+      setUrlPreview({
+        title: null,
+        description: null,
+        siteName: null,
+        hostname: null,
+        imgUrl: null,
+      });
+    }
+    return () => {};
+  }, [currentUrl, apiUrlPreview]);
+
+  const setUrl = useCallback((arg) => {
+    setCurrentUrl(arg);
+  }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const setUrlPreviewDebounce = useCallback(debounce(setUrl, 1000), [setUrl]);
 
   return (
     <PostCreatorContainer className={cx('postComposeBar', className)}>
@@ -333,6 +398,13 @@ const PostCreatorBar = ({
             </UploadsContainer>
           }
           onChange={({ text, plainText: plainTextVal, lastMentionText, mentions }) => {
+            const regex = /(https?:\/\/[^\s]+|www\.[^\s]+\.[^\s]+)/g;
+            if (apiUrlPreview && plainTextVal && plainTextVal.match(regex)) {
+              const url = plainTextVal.match(regex)[0];
+              setUrlPreviewDebounce(url);
+            } else {
+              setUrlPreviewDebounce('');
+            }
             // Disrupt the flow
             if (mentions?.length > MAXIMUM_POST_MENTIONEES) {
               return info({
@@ -349,6 +421,18 @@ const PostCreatorBar = ({
             setPlainText(plainTextVal);
           }}
         />
+        {currentUrl && (
+          <UrlPreviewContainer>
+            <UrlPreviewStyled
+              title={urlPreview.title}
+              description={urlPreview.description}
+              descriptionLength={urlPreview.descriptionLength}
+              siteName={urlPreview.siteName}
+              hostname={urlPreview.hostname}
+              imgUrl={urlPreview.imgUrl}
+            />
+          </UrlPreviewContainer>
+        )}
         <Footer>
           <UploaderButtons
             imageUploadDisabled={postFiles.length > 0 || postVideos.length > 0 || uploadLoading}

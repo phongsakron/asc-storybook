@@ -25,6 +25,7 @@ const UiKitProvider = forwardRef(
       apiKey,
       apiRegion,
       apiEndpoint,
+      apiUrlPreview,
       authToken,
       userId,
       displayName,
@@ -106,7 +107,7 @@ const UiKitProvider = forwardRef(
           <ThemeProvider theme={buildGlobalTheme(theme)}>
             <UIStyles>
               <SDKProvider {...SDKInfo}>
-                <ConfigProvider config={{ socialCommunityCreationButtonVisible }}>
+                <ConfigProvider config={{ socialCommunityCreationButtonVisible, apiUrlPreview }}>
                   <CustomComponentsProvider value={customComponents}>
                     <NavigationProvider {...actionHandlers}>
                       <PostRendererProvider postRenderers={postRenderers}>
@@ -129,6 +130,7 @@ const UiKitProvider = forwardRef(
 UiKitProvider.propTypes = {
   apiKey: PropTypes.string.isRequired,
   apiEndpoint: PropTypes.string.isRequired,
+  apiUrlPreview: PropTypes.string,
   apiRegion: PropTypes.string.isRequired,
   authToken: PropTypes.string,
   userId: PropTypes.string.isRequired,

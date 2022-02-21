@@ -4,6 +4,7 @@ import InputText from '~/core/components/InputText';
 import UIAvatar from '~/core/components/Avatar';
 import { Poll } from '~/icons';
 import PlayCircle from '~/icons/PlayCircle';
+import UrlPreview from '../../../../core/components/UrlPreview';
 
 export const Avatar = styled(UIAvatar)`
   margin-right: 8px;
@@ -66,3 +67,9 @@ export const PollIconContainer = styled.div`
 `;
 
 export const PollIcon = styled(Poll)``;
+
+export const UrlPreviewContainer = styled.div`
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+`;
+export const UrlPreviewStyled = styled(UrlPreview)``;

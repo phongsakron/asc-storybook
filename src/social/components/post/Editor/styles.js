@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { PrimaryButton } from '~/core/components/Button';
+import UrlPreview from '../../../../core/components/UrlPreview';
 
 export const PostEditorContainer = styled.div`
   width: 520px;
@@ -24,3 +25,9 @@ export const PostButton = styled(PrimaryButton)`
   padding: 10px 16px;
   margin-left: auto;
 `;
+
+export const UrlPreviewContainer = styled.div`
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+`;
+export const UrlPreviewStyled = styled(UrlPreview)``;
