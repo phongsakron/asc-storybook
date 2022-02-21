@@ -27,6 +27,8 @@ import {
   CommunityName,
 } from './styles';
 
+import useCommunity from '~/social/hooks/useCommunity';
+
 const UICommunityInfo = ({
   communityId,
   communityCategories,
@@ -48,6 +50,9 @@ const UICommunityInfo = ({
   needApprovalOnPostCreation,
 }) => {
   const { formatMessage } = useIntl();
+  const { community } = useCommunity(communityId);
+  const fetchPostsCount = community.postsCount;
+  console.log(postsCount);
 
   return (
     <Container>
@@ -67,7 +72,7 @@ const UICommunityInfo = ({
         <Header>
           <CountsContainer>
             <Count>
-              <div className="countNumber">{toHumanString(postsCount || 0)}</div>
+              <div className="countNumber">{toHumanString(fetchPostsCount || 0)}</div>
               <div className="countType">
                 <FormattedMessage id="community.posts" />
               </div>

@@ -25,7 +25,7 @@ const CategoryCard = ({ categoryId, className, loading, onClick, ...props }) => 
     margin: 'auto',
   };
 
-  if (windowDimensions.width < 376) {
+  if (windowDimensions.width < 768) {
     mentionStyle = {
       minWidth: '130px',
       minHeight: '120px',
@@ -60,7 +60,7 @@ const CategoryCard = ({ categoryId, className, loading, onClick, ...props }) => 
   }, []);
 
   useEffect(() => {
-    if (windowDimensions.width < 376) {
+    if (windowDimensions.width < 768) {
       mentionStyle = {
         minWidth: '130px',
         minHeight: '120px',

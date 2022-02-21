@@ -1,4 +1,4 @@
-import React, { useMemo,useEffect,useState } from 'react';
+import React, { useMemo, useEffect, useState } from 'react';
 
 import { FormattedMessage } from 'react-intl';
 
@@ -45,9 +45,7 @@ const List = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-
-  return (
-    (windowDimensions.width > 376)?
+  return windowDimensions.width > 768 ? (
     <HorizontalList
       columns={{
         1024: 4,
@@ -60,7 +58,7 @@ const List = () => {
       loadMore={loadMore}
     >
       {items.map(({ categoryId, skeleton }) =>
-        (skeleton) ? (
+        skeleton ? (
           <CommunityCategoryCard key={categoryId} loading />
         ) : (
           <CommunityCategoryCard
@@ -71,30 +69,30 @@ const List = () => {
         ),
       )}
     </HorizontalList>
-    :
+  ) : (
     <HorizontalListMobile
-    columns={{
-      1024: 4,
-      1280: 5,
-      1440: 6,
-      1800: 8,
-    }}
-    title={<FormattedMessage id="categoryList" />}
-    hasMore={hasMore}
-    loadMore={loadMore}
-  >
-    {items.map(({ categoryId, skeleton }) =>
-      (skeleton) ? (
-        <CommunityCategoryCard key={categoryId} loading />
-      ) : (
-        <CommunityCategoryCard
-          key={categoryId}
-          categoryId={categoryId}
-          onClick={onClickCategory}
-        />
-      ),
-    )}
-  </HorizontalListMobile>
+      columns={{
+        1024: 4,
+        1280: 5,
+        1440: 6,
+        1800: 8,
+      }}
+      title={<FormattedMessage id="categoryList" />}
+      hasMore={hasMore}
+      loadMore={loadMore}
+    >
+      {items.map(({ categoryId, skeleton }) =>
+        skeleton ? (
+          <CommunityCategoryCard key={categoryId} loading />
+        ) : (
+          <CommunityCategoryCard
+            key={categoryId}
+            categoryId={categoryId}
+            onClick={onClickCategory}
+          />
+        ),
+      )}
+    </HorizontalListMobile>
   );
 };
 

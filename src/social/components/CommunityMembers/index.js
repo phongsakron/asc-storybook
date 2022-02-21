@@ -73,7 +73,7 @@ const CommunityMembers = ({ communityId, currentUserId }) => {
         </LoadMore>
       </ConditionalRender>
       <ConditionalRender condition={activeTab === MemberTabs.MODERATORS}>
-        <LoadMore hasMore={hasMoreModerators} loadMore={loadMoreModerators}>
+        <LoadMore hasMore={hasMoreModerators && moderators < 2} loadMore={loadMoreModerators}>
           {moderators.length > 0 &&
             moderators.map(({ userId, roles, isBanned }) => (
               <CommunityMemberItem
