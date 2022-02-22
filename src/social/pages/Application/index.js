@@ -41,6 +41,7 @@ const StyledSearchSideMenu = styled(SearchSideMenu)`
 
 const ContentsLayout = styled.div`
   max-height: 100vh;
+  padding: 0 20px 0 20px;
   overflow: auto;
 `;
 
