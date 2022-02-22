@@ -94,7 +94,7 @@ export const Radio = styled.input.attrs({ type: 'radio' })`
 `;
 
 export const Form = styled.form`
-  min-width: 520px;
+  width: 100%;
 `;
 
 export const SubmitButton = styled(PrimaryButton).attrs({
