@@ -7,7 +7,13 @@ import { CommentContent, ReadMoreButton, Highlighted } from './styles';
 
 const COMMENT_MAX_LINES = 8;
 
-const CommentText = ({ text, className, mentionees, maxLines = COMMENT_MAX_LINES }) => {
+const CommentText = ({
+  text,
+  className,
+  mentionees,
+  maxLines = COMMENT_MAX_LINES,
+  itemKeyProp,
+}) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const expand = () => setIsExpanded(true);
   const createTextWithHighlightMention = () => {
@@ -27,7 +33,9 @@ const CommentText = ({ text, className, mentionees, maxLines = COMMENT_MAX_LINES
         view.push(text.slice(prevEnd, start));
       }
       // add mention here
-      view.push(<Highlighted>{text.slice(start, end)}</Highlighted>);
+      view.push(
+        <Highlighted key={`${itemKeyProp}-highlighted-${i}`}>{text.slice(start, end)}</Highlighted>,
+      );
       if (i === splitTextIndex.length - 1) {
         view.push(text.slice(end, text.length));
       }

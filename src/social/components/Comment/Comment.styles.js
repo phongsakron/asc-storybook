@@ -116,7 +116,12 @@ const StyledComment = ({
               </PrimaryButton>
             </ButtonContainer>
           </CommentEditContainer>
-          <CommentText text={text} mentionees={mentionees} metadata={metadata} />
+          <CommentText
+            text={text}
+            mentionees={mentionees}
+            metadata={metadata}
+            itemKeyProp={commentId}
+          />
         </ConditionalRender>
 
         <ConditionalRender condition={!isEditing && (canLike || canReply || options.length > 0)}>
