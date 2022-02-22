@@ -56,7 +56,7 @@ const Layout = ({ aside, header, children }) => {
     <LayoutContainer>
       <Header>{header}</Header>
       <Container>
-        <Main>{children}</Main>
+        <Main id="main">{children}</Main>
         <Side>{aside}</Side>
       </Container>
     </LayoutContainer>

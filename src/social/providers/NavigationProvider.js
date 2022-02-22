@@ -23,8 +23,7 @@ if (process.env.NODE_ENV !== 'production') {
     onChangePage: (type) => console.log(`NavigationContext onChangePage(${type})`),
     onClickCategory: (categoryId) =>
       console.log(`NavigationContext onClickCategory(${categoryId})`),
-    onClickCategoryList: () =>
-      console.log(`NavigationContext onClickCategoryList(${communityId})`),
+    onClickCategoryList: () => console.log(`NavigationContext onClickCategoryList()`),
     onClickUser: (userId) => console.log(`NavigationContext onClickUser(${userId})`),
     onCommunityCreated: (communityId) =>
       console.log(`NavigationContext onCommunityCreated(${communityId})`),
@@ -75,11 +74,6 @@ export default ({
   const pushPage = useCallback(
     async (newPage) => {
       if (!(await confirmPageChange())) return;
-
-      children
-      console.log("golf", pages);
-      console.log("golf",newPage);
-
       setPages((prevState) => [...prevState, newPage]);
     },
     [confirmPageChange],
@@ -157,22 +151,19 @@ export default ({
     [onChangePage, onClickCategory, pushPage],
   );
 
-  const handleClickCategoryList = useCallback(
-    () => {
-      console.log(onChangePage);
-      console.log(handleClickCategoryList);
-      // alert("test")
-      const next = {
-        type: PageTypes.CategoryList
-      };
+  const handleClickCategoryList = useCallback(() => {
+    console.log(onChangePage);
+    console.log(handleClickCategoryList);
+    // alert("test")
+    const next = {
+      type: PageTypes.CategoryList,
+    };
 
-      if (onChangePage) return onChangePage(next);
-      if (onClickCategoryList) return onClickCategoryList();
+    if (onChangePage) return onChangePage(next);
+    if (onClickCategoryList) return onClickCategoryList();
 
-      pushPage(next);
-    },
-    [onChangePage, onClickCategoryList, pushPage],
-  );
+    pushPage(next);
+  }, [onChangePage, onClickCategoryList, pushPage]);
 
   const handleClickUser = useCallback(
     (userId, pageType) => {
@@ -255,6 +246,7 @@ export default ({
       setNavigationBlocker,
     }),
     [
+      handleClickCategoryList,
       handleChangePage,
       handleClickCategory,
       handleClickCommunity,
