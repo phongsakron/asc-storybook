@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import withSDK from '~/core/hocs/withSDK';
 
@@ -11,14 +11,21 @@ import Avatar from '~/core/components/Avatar';
 
 const SideSectionProfile = ({ currentUserId }) => {
   const { onClickUser } = useNavigation();
-  const { file } = useUser(currentUserId);
+  const [userDisplayName, setUserDisplayName] = useState(null);
+  const [profileUrl, setProfileUrl] = useState(null);
+  const { user, file } = useUser(currentUserId);
+
+  useEffect(() => {
+    setUserDisplayName(user.displayName);
+    setProfileUrl(file.fileUrl);
+  }, [currentUserId, user.displayName, file.fileUrl]);
 
   return (
     <SideMenuSection>
       <SideMenuActionItem
         iconProfile={
           <Avatar
-            avatar={file.fileUrl}
+            avatar={profileUrl}
             backgroundImage={User}
             loading={false}
             onClick={onClickUser}
@@ -27,7 +34,7 @@ const SideSectionProfile = ({ currentUserId }) => {
         active={false}
         onClick={() => onClickUser(currentUserId)}
       >
-        {currentUserId}
+        {userDisplayName}
       </SideMenuActionItem>
     </SideMenuSection>
   );
