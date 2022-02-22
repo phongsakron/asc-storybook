@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import styled from 'styled-components';
 
-import { PageTypes } from '~/social/constants';
+import { PageTypes, PageTypesToTitle } from '~/social/constants';
 
 import MainLayout from '~/social/layouts/Main';
 
@@ -22,6 +22,7 @@ import { useNavigation } from '~/social/providers/NavigationProvider';
 
 const ApplicationContainer = styled.div`
   height: 100%;
+  max-height: 100vh;
   overflow: auto;
   width: 100%;
 `;
@@ -121,6 +122,7 @@ const Community = () => {
         header={
           isShowHeader ? (
             <NavBar
+              currentPage={PageTypesToTitle[currPage]}
               onClickBars={() => handleToggleAside('Explore')}
               onClickSearch={() => {
                 handleToggleAside('Search');

@@ -182,6 +182,7 @@ const DefaultPostRenderer = ({
             dataType={livestreamContent?.dataType ?? dataType}
             postMaxLines={postMaxLines}
             mentionees={metadata?.mentioned}
+            urlPreview={metadata?.urlPreview}
           />
 
           {hasChildrenPosts && <ChildrenContent>{childrenContent}</ChildrenContent>}

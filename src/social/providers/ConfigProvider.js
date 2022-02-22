@@ -3,6 +3,7 @@ import { stripUndefinedValues } from '~/helpers/utils';
 
 const defaultConfig = {
   socialCommunityCreationButtonVisible: true,
+  apiUrlPreview: null,
 };
 
 const ConfigContext = createContext(defaultConfig);

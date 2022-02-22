@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import Truncate from 'react-truncate-markup';
-import Highlighter from 'react-highlight-words';
 import { findChunks } from '~/helpers/utils';
 import Linkify from '~/core/components/Linkify';
 import { CommentContent, ReadMoreButton, Highlighted } from './styles';
@@ -11,17 +10,34 @@ const COMMENT_MAX_LINES = 8;
 const CommentText = ({ text, className, mentionees, maxLines = COMMENT_MAX_LINES }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const expand = () => setIsExpanded(true);
+  const createTextWithHighlightMention = () => {
+    const view = [];
+    if (!mentionees || mentionees.length === 0) {
+      return text;
+    }
+    const splitTextIndex = findChunks(mentionees);
+
+    for (let i = 0; i < splitTextIndex.length; i += 1) {
+      const { start, end } = splitTextIndex[i];
+      if (i === 0 && start !== 0) {
+        view.push(text.slice(0, start));
+      }
+      if (i > 0) {
+        const prevEnd = splitTextIndex[i - 1].end;
+        view.push(text.slice(prevEnd, start));
+      }
+      // add mention here
+      view.push(<Highlighted>{text.slice(start, end)}</Highlighted>);
+      if (i === splitTextIndex.length - 1) {
+        view.push(text.slice(end, text.length));
+      }
+    }
+    return view;
+  };
 
   const textContent = text && (
     <CommentContent className={className}>
-      <Truncate.Atom>
-        <Highlighter
-          autoEscape
-          highlightTag={({ children: toHighLight }) => <Highlighted>{toHighLight}</Highlighted>}
-          findChunks={() => findChunks(mentionees)}
-          textToHighlight={text}
-        />
-      </Truncate.Atom>
+      <Truncate.Atom>{createTextWithHighlightMention()}</Truncate.Atom>
     </CommentContent>
   );
 

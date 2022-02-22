@@ -22,7 +22,7 @@ const InputCounter = ({
   // counter output
   renderResult = DefaultResultRenderer,
   resultFormat = '{counter}',
-  defaultValue = 0,
+  defaultValue = 1,
   onChange,
   onlyPositiveNumber = true,
 }) => {
@@ -38,7 +38,7 @@ const InputCounter = ({
           onChange(newValue);
         },
         icon: <MinusIcon />,
-        disabled: onlyPositiveNumber && counter - 1 < 0,
+        disabled: onlyPositiveNumber && counter - 1 < 1,
       })}
       {renderResult({ output: resultFormat.replace(COUNTER_VALUE_PLACEHOLDER, counter) })}
       {renderIncButton({
