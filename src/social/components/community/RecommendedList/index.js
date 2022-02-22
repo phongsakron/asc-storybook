@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 
 import React, { memo } from 'react';
-
 import { FormattedMessage } from 'react-intl';
 
 import HorizontalList from '~/core/components/HorizontalList';
@@ -25,11 +24,19 @@ const RecommendedList = () => {
 
   return (
     <HorizontalList title={title}>
-      {loading && new Array(4).fill(1).map((x, index) => <CommunityCard key={index} loading />)}
+      {loading &&
+        new Array(4)
+          .fill(1)
+          .map((x, index) => <CommunityCard key={index} loading css="width: 100%;" />)}
 
       {!loading &&
         communities.map(({ communityId }) => (
-          <CommunityCard key={communityId} communityId={communityId} onClick={onClickCommunity} />
+          <CommunityCard
+            key={communityId}
+            communityId={communityId}
+            css="width: 100%;"
+            onClick={onClickCommunity}
+          />
         ))}
     </HorizontalList>
   );
