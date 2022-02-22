@@ -60,7 +60,7 @@ const PollComposer = ({
     question: '',
     answers: [],
     answerType: PollAnswerType.Single,
-    closedIn: 0,
+    closedIn: 1,
   };
 
   const {
