@@ -6,5 +6,6 @@ import { faChevronRight } from '@fortawesome/pro-regular-svg-icons';
 export default styled(FontAwesomeIcon).attrs({ icon: faChevronRight })`
   && {
     font-size: ${({ height = 'inherit' }) => height};
+    margin-right: 3%;
   }
 `;
