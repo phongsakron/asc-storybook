@@ -36,7 +36,7 @@ const UICommunityCard = ({
   const handleClick = () => onClick(communityId);
 
   return (
-    <Container onClick={handleClick} {...props}>
+    <Container onClick={handleClick} {...props} css="width: min-content;">
       <Cover backgroundImage={avatarFileUrl ?? communityCoverPlaceholder}>
         <CoverContent>
           <CommunityName
@@ -48,7 +48,7 @@ const UICommunityCard = ({
           />
           <Truncate lines={1}>
             <CategoriesList>
-              {(communityCategories || []).map((category) => category.name).join(', ')}
+              {(communityCategories || []).map(category => category.name).join(', ')}
             </CategoriesList>
           </Truncate>
         </CoverContent>

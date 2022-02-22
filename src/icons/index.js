@@ -51,6 +51,7 @@ export { default as Dots } from './Dots';
 
 // fontawesome
 export { default as Plus } from './Plus';
+export { default as Bars } from './Bars';
 export { default as Pencil } from './Pencil';
 export { default as Remove } from './Remove';
 export { default as Reply } from './Reply';

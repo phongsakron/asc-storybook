@@ -80,7 +80,6 @@ const UiKitProvider = forwardRef(
       }
 
       return { client };
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [apiKey, userId, displayName, authToken, preventReconnect]);
 
     useImperativeHandle(ref, () => ({
@@ -143,6 +142,7 @@ UiKitProvider.propTypes = {
   actionHandlers: PropTypes.shape({
     onChangePage: PropTypes.func,
     onClickCategory: PropTypes.func,
+    onClickCategoryList: PropTypes.func,
     onClickCommunity: PropTypes.func,
     onClickUser: PropTypes.func,
     onCommunityCreated: PropTypes.func,

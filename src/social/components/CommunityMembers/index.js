@@ -11,8 +11,8 @@ import ConditionalRender from '~/core/components/ConditionalRender';
 import LoadMore from '~/social/components/LoadMore';
 import { useNavigation } from '~/social/providers/NavigationProvider';
 
-import CommunityMemberItem from './CommunityMemberItem';
 import withSDK from '~/core/hocs/withSDK';
+import CommunityMemberItem from './CommunityMemberItem';
 
 import { MemberTabs } from './constants';
 import { CommunityMembersContainer, CommunityMembersHeader, CommunityMembersTabs } from './styles';
@@ -73,7 +73,7 @@ const CommunityMembers = ({ communityId, currentUserId }) => {
         </LoadMore>
       </ConditionalRender>
       <ConditionalRender condition={activeTab === MemberTabs.MODERATORS}>
-        <LoadMore hasMore={hasMoreModerators} loadMore={loadMoreModerators}>
+        <LoadMore hasMore={hasMoreModerators && moderators < 2} loadMore={loadMoreModerators}>
           {moderators.length > 0 &&
             moderators.map(({ userId, roles, isBanned }) => (
               <CommunityMemberItem

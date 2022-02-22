@@ -8,10 +8,10 @@ import UserHeader from '~/social/components/UserHeader';
 import useUser from '~/core/hooks/useUser';
 import ConditionalRender from '~/core/components/ConditionalRender';
 import useReport from '~/social/hooks/useReport';
-import { MemberInfo, CommunityMemberContainer } from './styles';
 import { confirm } from '~/core/components/Confirm';
 import { isModerator } from '~/helpers/permissions';
 import { MemberRoles } from '~/social/constants';
+import { MemberInfo, CommunityMemberContainer } from './styles';
 
 const { COMMUNITY_MODERATOR, CHANNEL_MODERATOR } = MemberRoles;
 

@@ -9,6 +9,7 @@ import ConditionalRender from '~/core/components/ConditionalRender';
 import PostLikeButton from '~/social/components/post/LikeButton';
 import CommentComposeBar from '~/social/components/CommentComposeBar';
 import { SecondaryButton } from '~/core/components/Button';
+import CommentList from '~/social/components/CommentList';
 import {
   EngagementBarContainer,
   Counters,
@@ -16,7 +17,6 @@ import {
   CommentIcon,
   NoInteractionMessage,
 } from './styles';
-import CommentList from '~/social/components/CommentList';
 
 const COMMENTS_PER_PAGE = 5;
 

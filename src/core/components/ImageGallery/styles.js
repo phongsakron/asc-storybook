@@ -36,7 +36,7 @@ export const Container = styled.div`
     }
   }
 
-  @media screen and (min-width: 769px){
+  @media screen and (min-width: 769px) {
     display: grid;
     grid-gap: 1rem 3rem;
     grid-template-columns: 2rem auto 2rem;
@@ -56,7 +56,7 @@ const Image = styled.img`
   object-position: center;
 `;
 
-export const ImageRenderer = (url) => <Image key={url} src={url} />;
+export const ImageRenderer = url => <Image key={url} src={url} />;
 
 export const Frame = styled.div`
   grid-area: image;
@@ -88,12 +88,12 @@ const InvisibleButton = styled.button`
   }
 `;
 
-export const LeftButton = styled((props) => (
+export const LeftButton = styled(props => (
   <InvisibleButton rel="left" {...props}>
     <ChevronLeft height="24px" />
   </InvisibleButton>
 ))`
-@media screen and (max-width: 768px){
+  @media screen and (max-width: 768px) {
     background: rgba(0, 0, 0, 0.2);
     height: 30px;
     width: 30px;
@@ -104,18 +104,18 @@ export const LeftButton = styled((props) => (
     position: absolute;
     top: calc(50vh - 15px);
     left: 1rem;
-    svg{
+    svg {
       font-size: 14px !important;
     }
   }
 `;
 
-export const RightButton = styled((props) => (
+export const RightButton = styled(props => (
   <InvisibleButton rel="right" {...props}>
     <ChevronRight height="24px" />
   </InvisibleButton>
 ))`
-  @media screen and (max-width: 768px){
+  @media screen and (max-width: 768px) {
     background: rgba(0, 0, 0, 0.2);
     height: 30px;
     width: 30px;
@@ -126,13 +126,13 @@ export const RightButton = styled((props) => (
     position: absolute;
     top: calc(50vh - 15px);
     right: 1rem;
-    svg{
+    svg {
       font-size: 14px !important;
     }
   }
 `;
 
-export const CloseButton = styled((props) => (
+export const CloseButton = styled(props => (
   <InvisibleButton rel="close" {...props}>
     <Remove height="20px" />
   </InvisibleButton>
@@ -144,7 +144,7 @@ export const CloseButton = styled((props) => (
   display: flex;
   align-items: center;
   justify-content: center;
-  @media screen and (max-width: 768px){
+  @media screen and (max-width: 768px) {
     position: absolute;
     top: 1rem;
     right: 5px;

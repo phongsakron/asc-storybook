@@ -1,8 +1,8 @@
 import React from 'react';
-import EmptyState from '.';
 import EmptyFeedIcon from '~/icons/EmptyFeed';
 import UserIcon from '~/icons/User';
 import BalloonIcon from '~/icons/Balloon';
+import EmptyState from '.';
 
 export default {
   title: 'Ui Only/Empty State',
