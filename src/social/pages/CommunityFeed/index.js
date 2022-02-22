@@ -58,6 +58,8 @@ const CommunityFeed = ({ communityId, currentUserId, isNewCommunity }) => {
 
   const [isCreatedModalOpened, setCreatedModalOpened] = useState(isNewCommunity);
 
+  document.getElementById('main').children[0].scrollTop = 0;
+
   return (
     <Wrapper>
       <CommunityInfo communityId={communityId} />
