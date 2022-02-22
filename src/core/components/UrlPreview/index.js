@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import Close from '~/icons/Close';
 
 const Container = styled.div`
   position: relative;
@@ -13,24 +14,31 @@ const Container = styled.div`
   color: $primary;
   transition: 0.3s all ease;
   height: fit-content;
-
+  text-decoration: none;
   &:hover {
     background-color: rgb(250, 250, 250) !important;
     cursor: pointer;
   }
 `;
 
-// const CloseContainer = styled.div`
-//   width: 25px;
-//   height: 25px;
-//   background-color: red;
-//   position: absolute;
-//   top: 0;
-//   right: 0;
-//   margin-right: 0.5rem;
-//   margin-top: 0.5rem;
-//   border-radius: 50%;
-// `;
+const CloseContainer = styled.div`
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 0.5rem;
+  margin-top: 0.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:hover {
+    background-color: #ddd;
+  }
+`;
 
 const LowerContainer = styled.div`
   padding: 10px;
@@ -38,8 +46,7 @@ const LowerContainer = styled.div`
 
 const Title = styled.h3`
   margin-top: 0;
-  margin-bottom: 10px;
-
+  margin-bottom: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   @supports (-webkit-line-clamp: 2) {
@@ -53,9 +60,9 @@ const Title = styled.h3`
   }
 `;
 const Description = styled.div`
-  color: $secondary;
   overflow: hidden;
   text-overflow: ellipsis;
+  line-height: 1.3;
   @supports (-webkit-line-clamp: 3) {
     overflow-wrap: break-word;
     overflow: hidden;
@@ -74,15 +81,18 @@ const Image = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  height: 30vh;
+  height: 120px;
 `;
 
 const SiteDetails = styled.div`
-  color: $secondary;
-  margin-top: 10px;
+  color: #abaeba;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+`;
+
+const Link = styled.a`
+  text-decoration: none;
 `;
 
 const UrlPreview = ({
@@ -92,6 +102,8 @@ const UrlPreview = ({
   siteName,
   hostname,
   imgUrl,
+  isShowCloseButton = false,
+  onClose,
 }) => {
   const renderDescription = () => {
     if (descriptionLength > 0 && description.length > descriptionLength) {
@@ -102,8 +114,12 @@ const UrlPreview = ({
 
   return (
     <Container>
-      {/* <CloseContainer /> */}
-      <a href={hostname} target="_blank" rel="noreferrer">
+      {isShowCloseButton && (
+        <CloseContainer onClick={onClose}>
+          <Close />
+        </CloseContainer>
+      )}
+      <Link href={hostname} target="_blank" rel="noreferrer">
         {imgUrl && (
           <Image
             style={{
@@ -113,13 +129,13 @@ const UrlPreview = ({
         )}
         <LowerContainer>
           <Title>{title}</Title>
-          {description && <Description>{renderDescription()}</Description>}
           <SiteDetails>
             {siteName && <span>{siteName} • </span>}
             <span>{hostname}</span>
           </SiteDetails>
+          {description && <Description>{renderDescription()}</Description>}
         </LowerContainer>
-      </a>
+      </Link>
     </Container>
   );
 };
@@ -131,6 +147,8 @@ UrlPreview.propTypes = {
   siteName: PropTypes.string,
   hostname: PropTypes.string.isRequired,
   imgUrl: PropTypes.string,
+  isShowCloseButton: PropTypes.bool.isRequired,
+  onClose: PropTypes.func,
 };
 
 export default UrlPreview;

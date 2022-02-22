@@ -175,6 +175,8 @@ const PostEditor = ({ postId, onSave, className, placeholder }) => {
               siteName={urlPreview.siteName}
               hostname={urlPreview.hostname}
               imgUrl={urlPreview.imgUrl}
+              isShowCloseButton
+              onClose={() => setUrl('')}
             />
           </UrlPreviewContainer>
         )}
