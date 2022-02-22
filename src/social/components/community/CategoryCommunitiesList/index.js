@@ -49,9 +49,14 @@ const CategoryCommunitiesList = ({ categoryId }) => {
     >
       {({ communityId, skeleton }) =>
         skeleton ? (
-          <CommunityCard key={communityId} loading />
+          <CommunityCard key={communityId} loading css="width: 100%;" />
         ) : (
-          <CommunityCard key={communityId} communityId={communityId} onClick={onClickCommunity} />
+          <CommunityCard
+            key={communityId}
+            communityId={communityId}
+            css="width: 100%;"
+            onClick={onClickCommunity}
+          />
         )
       }
     </PaginatedList>
