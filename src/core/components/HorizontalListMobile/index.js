@@ -1,7 +1,5 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
-import useMeasure from 'react-use/lib/useMeasure';
-import useScroll from 'react-use/lib/useScroll';
 import Button from '~/core/components/Button';
 import ChevronRightIcon from '~/icons/ChevronRight';
 import { useNavigation } from '~/social/providers/NavigationProvider';
@@ -60,66 +58,36 @@ const StretchedList = styled.div`
   ${({ columns }) =>
     Object.entries(columns).map(
       ([breakpoint, column]) => `
-        @media (max-width: ${breakpoint}px) {
-        grid-auto-columns: calc((100% / ${column}) - (${ITEM_SPACE_SIZE}px * ${column -
-        1} / ${column}));
+        @media (min-width: ${breakpoint}px) {
+        grid-auto-columns: calc((100% / ${column}) - (${ITEM_SPACE_SIZE}px * ${
+        column - 1
+      } / ${column}));
     }
   `,
     )} );
 `;
 
-function HorizontalListMobile({
-  title = '',
-  children,
-  columns = DEFAULT_COLUMN_NUMBER,
-  hasMore = false,
-  loadMore = () => {},
-}) {
+const HorizontalListMobile = ({ title = '', children, columns = DEFAULT_COLUMN_NUMBER }) => {
   const { onClickCategoryList } = useNavigation();
 
   const containerRef = useRef(null);
-  const { x: scrollPosition } = useScroll(containerRef);
-  const [wrapperRef, { width }] = useMeasure();
   const [page] = useState(0);
-  console.log(children);
-  const contentWidth = useMemo(() => containerRef.current?.scrollWidth ?? 0, [
-    containerRef.current?.scrollWidth,
-  ]);
-
-  const hasMultiPage = useMemo(() => contentWidth > width, [contentWidth, width]);
-
-  useEffect(
-    () =>
-      containerRef.current?.scrollTo({
-        left: (width + ITEM_SPACE_SIZE) * page,
-        behavior: 'smooth',
-      }),
-    [containerRef.current, width, page],
-  );
-
-  useEffect(() => {
-    if (scrollPosition >= contentWidth - width * 2 && hasMore) {
-      loadMore();
-    }
-  }, [scrollPosition, contentWidth, width, hasMore]);
 
   return (
-    <div ref={wrapperRef}>
+    <div>
       <Header>
         <Title>{title}</Title>
-        {hasMultiPage && (
-          <Pagination>
-            <PaginationButton onClick={() => onClickCategoryList()}>
-              <ChevronRightIcon height="20px" />
-            </PaginationButton>
-          </Pagination>
-        )}
+        <Pagination>
+          <PaginationButton onClick={() => onClickCategoryList()}>
+            <ChevronRightIcon height="20px" />
+          </PaginationButton>
+        </Pagination>
       </Header>
       <ScrollContainer ref={containerRef} page={page}>
         <StretchedList columns={columns}>{children}</StretchedList>
       </ScrollContainer>
     </div>
   );
-}
+};
 
 export default HorizontalListMobile;
