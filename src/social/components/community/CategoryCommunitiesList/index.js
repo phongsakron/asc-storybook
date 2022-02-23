@@ -49,12 +49,16 @@ const CategoryCommunitiesList = ({ categoryId }) => {
     >
       {({ communityId, skeleton }) =>
         skeleton ? (
-          <CommunityCard key={communityId} loading css="width: 100%;" />
+          <CommunityCard
+            key={communityId}
+            loading
+            css="width: 100%;max-width: 176px;margin:auto;"
+          />
         ) : (
           <CommunityCard
             key={communityId}
             communityId={communityId}
-            css="width: 100%;"
+            css="width: 100%;max-width: 176px;margin:auto;"
             onClick={onClickCommunity}
           />
         )
