@@ -15,7 +15,7 @@ const CategoryCommunitiesPage = ({ categoryId }) => {
 
   const title = category?.name || '';
 
-  const onBack = () => onChangePage(PageTypes.CategoryList);
+  const onBack = () => onChangePage(PageTypes.Explore);
 
   return (
     <PageContainer>
