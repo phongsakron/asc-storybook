@@ -1,11 +1,10 @@
-import React, { useMemo, useEffect, useState } from 'react';
+import React, { useMemo } from 'react';
 
 import { FormattedMessage } from 'react-intl';
 
 import useCategories from '~/social/hooks/useCategories';
 import { useNavigation } from '~/social/providers/NavigationProvider';
 import HorizontalList from '~/core/components/HorizontalList';
-import HorizontalListMobile from '~/core/components/HorizontalListMobile';
 import CommunityCategoryCard from '~/social/components/community/CategoryCard';
 
 const List = () => {
@@ -27,25 +26,7 @@ const List = () => {
     return [...categories, ...getLoadingItems()];
   }, [categories, loading, loadingMore]);
 
-  function getWindowDimensions() {
-    const { innerWidth: width, innerHeight: height } = window;
-    return {
-      width,
-      height,
-    };
-  }
-  const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
-
-  useEffect(() => {
-    function handleResize() {
-      setWindowDimensions(getWindowDimensions());
-    }
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  return windowDimensions.width > 768 ? (
+  return (
     <HorizontalList
       columns={{
         1024: 4,
@@ -69,30 +50,6 @@ const List = () => {
         ),
       )}
     </HorizontalList>
-  ) : (
-    <HorizontalListMobile
-      columns={{
-        1024: 4,
-        1280: 5,
-        1440: 6,
-        1800: 8,
-      }}
-      title={<FormattedMessage id="categoryList" />}
-      hasMore={hasMore}
-      loadMore={loadMore}
-    >
-      {items.map(({ categoryId, skeleton }) =>
-        skeleton ? (
-          <CommunityCategoryCard key={categoryId} loading />
-        ) : (
-          <CommunityCategoryCard
-            key={categoryId}
-            categoryId={categoryId}
-            onClick={onClickCategory}
-          />
-        ),
-      )}
-    </HorizontalListMobile>
   );
 };
 

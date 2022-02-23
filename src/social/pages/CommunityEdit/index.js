@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { ImageSize, FileRepository } from '@amityco/js-sdk';
-
+import CommunityPermissions from '~/social/components/CommunityPermissions';
 import ConditionalRender from '~/core/components/ConditionalRender';
 import CommunityMembers from '~/social/components/CommunityMembers';
 import CommunityForm from '~/social/components/CommunityForm';
@@ -101,6 +101,7 @@ const CommunityEditPage = ({ communityId, tab }) => {
       <ConditionalRender condition={activeTab === PageTabs.MEMBERS}>
         <CommunityMembers communityId={communityId} />
       </ConditionalRender>
+      {activeTab === PageTabs.PERMISSIONS && <CommunityPermissions communityId={communityId} />}
     </PageLeftAside>
   );
 };
