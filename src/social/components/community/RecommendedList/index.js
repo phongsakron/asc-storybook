@@ -27,7 +27,9 @@ const RecommendedList = () => {
       {loading &&
         new Array(4)
           .fill(1)
-          .map((x, index) => <CommunityCard key={index} loading css="width: 100%;" />)}
+          .map((x, index) => (
+            <CommunityCard key={index} loading css="width: 100%;max-width: 166px;" />
+          ))}
 
       {!loading &&
         communities.map(({ communityId }) => (
