@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import styled from 'styled-components';
 
 import { PageTypes, PageTypesToTitle } from '~/social/constants';
@@ -26,17 +26,34 @@ const ApplicationContainer = styled.div`
   overflow: auto;
   width: 100%;
 `;
+const AsideContainer = styled.div`
+  min-height: 100%;
+  display: inline;
+`;
 
 const StyledCommunitySideMenu = styled(CommunitySideMenu)`
   min-height: 100%;
+  display: block;
   @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+const StyledCommunitySideMenuMobile = styled(CommunitySideMenu)`
+  min-height: 100%;
+  display: none;
+  @media (max-width: 768px) {
+    display: block;
     width: 100vw;
   }
 `;
+
 const StyledSearchSideMenu = styled(SearchSideMenu)`
   min-height: 100%;
   overflow: auto;
+  display: none;
   @media (max-width: 768px) {
+    display: block;
     width: 100vw;
   }
 `;
@@ -49,19 +66,9 @@ const ContentsLayout = styled.div`
 
 const Community = () => {
   const { page } = useNavigation();
-  const [isShowAside, setIsShowAside] = useState(false);
   const [isShowHeader, setIsShowHeader] = useState(true);
   const [asidePage, setAsidePage] = useState('Explore');
-  const [isMobile, setIsMobile] = useState(false);
-
-  function getWindowDimensions() {
-    const { innerWidth: width, innerHeight: height } = window;
-    return {
-      width,
-      height,
-    };
-  }
-  const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+  const [isShowAside, setIsShowAside] = useState(false);
 
   // eslint-disable-next-line no-shadow
   const handleToggleAside = (page) => {
@@ -76,46 +83,8 @@ const Community = () => {
   const currPage = useMemo(() => {
     setIsShowHeader(true);
     setAsidePage('Explore');
-    if (isMobile) {
-      setIsShowAside(false);
-    }
     return page.type;
-  }, [isMobile, page]);
-
-  useEffect(() => {
-    if (windowDimensions.width <= 768) {
-      // setIsShowHeader(true)
-      setIsShowAside(false);
-      setIsMobile(true);
-    } else {
-      setIsShowAside(true);
-      setIsMobile(false);
-    }
-  }, [windowDimensions]);
-
-  useEffect(() => {
-    function handleResize() {
-      setWindowDimensions(getWindowDimensions());
-    }
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  // eslint-disable-next-line no-shadow
-  const asideRender = (page) => {
-    if (page === 'Explore') {
-      return <StyledCommunitySideMenu activeCommunity={page.communityId} />;
-    }
-    return (
-      <StyledSearchSideMenu
-        onClose={() => {
-          setIsShowHeader(true);
-          setIsShowAside(false);
-        }}
-      />
-    );
-  };
+  }, [page]);
 
   return (
     <ApplicationContainer>
@@ -134,7 +103,22 @@ const Community = () => {
             <div />
           )
         }
-        aside={isShowAside ? asideRender(asidePage) : <div />}
+        aside={
+          <AsideContainer>
+            <StyledCommunitySideMenu activeCommunity={page.communityId} />
+            {isShowAside && asidePage === 'Explore' && (
+              <StyledCommunitySideMenuMobile activeCommunity={page.communityId} />
+            )}
+            {isShowAside && asidePage === 'Search' && (
+              <StyledSearchSideMenu
+                onClose={() => {
+                  setIsShowHeader(true);
+                  setIsShowAside(false);
+                }}
+              />
+            )}
+          </AsideContainer>
+        }
       >
         <ContentsLayout>
           {currPage === PageTypes.Explore && <ExplorePage />}
