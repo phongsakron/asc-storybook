@@ -1,5 +1,5 @@
 import { CommunitySortingMethod } from '@amityco/js-sdk';
-import React, { memo, useMemo } from 'react';
+import React, { memo, useMemo, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
@@ -33,7 +33,52 @@ const CategoryCommunitiesList = ({ categoryId }) => {
     return [...communities, ...getLoadingItems()];
   }, [communities, loading, loadingMore]);
 
-  return (
+  function getWindowDimensions() {
+    const { innerWidth: width, innerHeight: height } = window;
+    return {
+      width,
+      height,
+    };
+  }
+  const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowDimensions(getWindowDimensions());
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return windowDimensions.width > 768 ? (
+    <PaginatedList
+      items={items}
+      hasMore={hasMore}
+      loadMore={loadMore}
+      container={Grid}
+      emptyState={
+        <ListEmptyState
+          icon={<EmptyFeedIcon width={48} height={48} />}
+          title={<FormattedMessage id="CategoryCommunitiesList.emptyTitle" />}
+          description={<FormattedMessage id="CategoryCommunitiesList.emptyDescription" />}
+        />
+      }
+    >
+      {({ communityId, skeleton }) =>
+        skeleton ? (
+          <CommunityCard key={communityId} loading css="width: 100%;max-width: 176px;" />
+        ) : (
+          <CommunityCard
+            key={communityId}
+            communityId={communityId}
+            css="width: 100%;max-width: 176px;"
+            onClick={onClickCommunity}
+          />
+        )
+      }
+    </PaginatedList>
+  ) : (
     <PaginatedList
       items={items}
       hasMore={hasMore}
