@@ -30,11 +30,11 @@ const PostEditor = ({ postId, onSave, className, placeholder }) => {
   // Url preview
   const { apiUrlPreview } = useConfig();
   const [urlPreview, setUrlPreview] = useState({
-    title: metadata?.urlPreview?.title ?? null,
-    description: metadata?.urlPreview?.description ?? null,
-    siteName: metadata?.urlPreview?.siteName ?? null,
-    hostname: metadata?.urlPreview?.hostname ?? null,
-    imgUrl: metadata?.urlPreview?.imgUrl ?? null,
+    title: metadata?.urlPreview?.title,
+    description: metadata?.urlPreview?.description,
+    siteName: metadata?.urlPreview?.siteName,
+    hostname: metadata?.urlPreview?.hostname,
+    imgUrl: metadata?.urlPreview?.imgUrl,
   });
   const [currentUrl, setCurrentUrl] = useState('');
 
