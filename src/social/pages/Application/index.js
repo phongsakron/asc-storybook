@@ -83,6 +83,7 @@ const Community = () => {
   const currPage = useMemo(() => {
     setIsShowHeader(true);
     setAsidePage('Explore');
+    setIsShowAside(false);
     return page.type;
   }, [page]);
 
