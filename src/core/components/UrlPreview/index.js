@@ -9,7 +9,6 @@ const Container = styled.div`
   background-color: white;
   display: flex;
   flex-direction: column;
-  border-radius: 7px;
   border: 1px solid #ccc;
   color: $primary;
   transition: 0.3s all ease;
@@ -42,6 +41,7 @@ const CloseContainer = styled.div`
 
 const LowerContainer = styled.div`
   padding: 10px;
+  background-color: #f9f9f9;
 `;
 
 const Title = styled.h3`
@@ -59,25 +59,25 @@ const Title = styled.h3`
     -webkit-box-orient: vertical;
   }
 `;
-const Description = styled.div`
-  overflow: hidden;
-  text-overflow: ellipsis;
-  line-height: 1.3;
-  @supports (-webkit-line-clamp: 3) {
-    overflow-wrap: break-word;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: initial;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-  }
-`;
+// const Description = styled.div`
+//   overflow: hidden;
+//   text-overflow: ellipsis;
+//   line-height: 1.3;
+//   @supports (-webkit-line-clamp: 3) {
+//     overflow-wrap: break-word;
+//     overflow: hidden;
+//     text-overflow: ellipsis;
+//     white-space: initial;
+//     display: -webkit-box;
+//     -webkit-line-clamp: 3;
+//     -webkit-box-orient: vertical;
+//   }
+// `;
 
 const Image = styled.div`
   width: 100%;
-  border-top-left-radius: 7px;
-  border-top-right-radius: 7px;
+  /* border-top-left-radius: 7px;
+  border-top-right-radius: 7px; */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -85,7 +85,7 @@ const Image = styled.div`
 `;
 
 const SiteDetails = styled.div`
-  color: #abaeba;
+  color: #858585;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -97,19 +97,25 @@ const Link = styled.a`
 
 const UrlPreview = ({
   title,
-  description,
-  descriptionLength = 200,
-  siteName,
+  // description,
+  // descriptionLength = 200,
+  // siteName,
   hostname,
   imgUrl,
   isShowCloseButton = false,
   onClose,
 }) => {
-  const renderDescription = () => {
-    if (descriptionLength > 0 && description.length > descriptionLength) {
-      return `${description.slice(0, descriptionLength)}...`;
-    }
-    return description;
+  // const renderDescription = () => {
+  //   if (descriptionLength > 0 && description.length > descriptionLength) {
+  //     return `${description.slice(0, descriptionLength)}...`;
+  //   }
+  //   return description;
+  // };
+
+  const getHost = (url) => {
+    const plainUrl = url.replace('http://', '').replace('https://', '');
+    const host = plainUrl.split('/')[0];
+    return host;
   };
 
   return (
@@ -128,12 +134,12 @@ const UrlPreview = ({
           />
         )}
         <LowerContainer>
-          <Title>{title}</Title>
           <SiteDetails>
-            {siteName && <span>{siteName} • </span>}
-            <span>{hostname}</span>
+            {/* {siteName && <span>{siteName} • </span>} */}
+            <span>{getHost(hostname)}</span>
           </SiteDetails>
-          {description && <Description>{renderDescription()}</Description>}
+          <Title>{title}</Title>
+          {/* {description && <Description>{renderDescription()}</Description>} */}
         </LowerContainer>
       </Link>
     </Container>
@@ -142,9 +148,9 @@ const UrlPreview = ({
 
 UrlPreview.propTypes = {
   title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  descriptionLength: PropTypes.number,
-  siteName: PropTypes.string,
+  // description: PropTypes.string.isRequired,
+  // descriptionLength: PropTypes.number,
+  // siteName: PropTypes.string,
   hostname: PropTypes.string.isRequired,
   imgUrl: PropTypes.string,
   isShowCloseButton: PropTypes.bool.isRequired,

@@ -133,11 +133,11 @@ const PostCreatorBar = ({
 
   // Url preview
   const [urlPreview, setUrlPreview] = useState({
-    title: null,
-    description: null,
-    siteName: null,
-    hostname: null,
-    imgUrl: null,
+    title: '',
+    description: '',
+    siteName: '',
+    hostname: '',
+    imgUrl: '',
   });
   const [currentUrl, setCurrentUrl] = useState('');
 
@@ -150,7 +150,7 @@ const PostCreatorBar = ({
 
     if (postText) {
       data.text = plainText;
-      if (apiUrlPreview) {
+      if (apiUrlPreview && currentUrl) {
         metadata.urlPreview = urlPreview;
       }
       metadata.type = 'text';
@@ -215,11 +215,11 @@ const PostCreatorBar = ({
     setIncomingFiles([]);
     setMentionees([]);
     setUrlPreview({
-      title: null,
-      description: null,
-      siteName: null,
-      hostname: null,
-      imgUrl: null,
+      title: '',
+      description: '',
+      siteName: '',
+      hostname: '',
+      imgUrl: '',
     });
     setCurrentUrl('');
     showPostCreatedNotification(post, model);
@@ -315,11 +315,11 @@ const PostCreatorBar = ({
       doGetDetail(currentUrl);
     } else {
       setUrlPreview({
-        title: null,
-        description: null,
-        siteName: null,
-        hostname: null,
-        imgUrl: null,
+        title: '',
+        description: '',
+        siteName: '',
+        hostname: '',
+        imgUrl: '',
       });
     }
     return () => {};

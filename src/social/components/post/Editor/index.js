@@ -30,11 +30,11 @@ const PostEditor = ({ postId, onSave, className, placeholder }) => {
   // Url preview
   const { apiUrlPreview } = useConfig();
   const [urlPreview, setUrlPreview] = useState({
-    title: metadata?.urlPreview?.title,
-    description: metadata?.urlPreview?.description,
-    siteName: metadata?.urlPreview?.siteName,
-    hostname: metadata?.urlPreview?.hostname,
-    imgUrl: metadata?.urlPreview?.imgUrl,
+    title: metadata?.urlPreview?.title ?? '',
+    description: metadata?.urlPreview?.description ?? '',
+    siteName: metadata?.urlPreview?.siteName ?? '',
+    hostname: metadata?.urlPreview?.hostname ?? '',
+    imgUrl: metadata?.urlPreview?.imgUrl ?? '',
   });
   const [currentUrl, setCurrentUrl] = useState('');
 
@@ -58,7 +58,7 @@ const PostEditor = ({ postId, onSave, className, placeholder }) => {
     const postMetadata = {};
     postMetadata.type = metadata.type;
 
-    if (metadata.type && metadata.type === 'text' && apiUrlPreview) {
+    if (metadata.type && metadata.type === 'text' && apiUrlPreview && currentUrl) {
       postMetadata.urlPreview = urlPreview;
     }
 
@@ -122,11 +122,11 @@ const PostEditor = ({ postId, onSave, className, placeholder }) => {
             setCurrentUrl('');
           } else {
             setUrlPreview({
-              title: respond.title,
-              description: respond.description,
-              siteName: respond.siteName,
-              hostname: respond.url,
-              imgUrl: respond.images[0] ?? null,
+              title: respond.title ?? '',
+              description: respond.description ?? '',
+              siteName: respond.siteName ?? '',
+              hostname: respond.url ?? '',
+              imgUrl: respond.images[0] ?? '',
             });
           }
         });
@@ -136,11 +136,11 @@ const PostEditor = ({ postId, onSave, className, placeholder }) => {
       doGetDetail(currentUrl);
     } else {
       setUrlPreview({
-        title: null,
-        description: null,
-        siteName: null,
-        hostname: null,
-        imgUrl: null,
+        title: '',
+        description: '',
+        siteName: '',
+        hostname: '',
+        imgUrl: '',
       });
     }
     return () => {};
