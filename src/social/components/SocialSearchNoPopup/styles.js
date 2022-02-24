@@ -16,7 +16,7 @@ export const SearchIcon = styled(Search)`
 
 export const SocialSearchContainer = styled.div`
   position: relative;
-
+  padding: 0;
   ${({ sticky }) =>
     sticky &&
     `
@@ -29,7 +29,6 @@ export const SocialSearchContainer = styled.div`
 export const SocialSearchInput = styled(InputAutocomplete)`
   ${({ theme }) => theme.typography.body};
   width: 100%;
-  padding: 10px 10px 10px 40px;
   background: ${({ theme }) => theme.palette.system.background};
   border: 1px solid #d5d7dd;
   border-radius: 4px;

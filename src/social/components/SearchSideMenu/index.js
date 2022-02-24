@@ -6,13 +6,11 @@ import UiKitSocialSearch from '~/social/components/SocialSearchNoPopup';
 
 const SocialSearch = styled(UiKitSocialSearch)`
   background: ${({ theme }) => theme.palette.system.background};
-  padding: 0.5rem;
   flex: 1;
 `;
 const SearchContainer = styled.div`
   display: 'flex';
   align-items: 'center';
-  padding: 0.5rem;
 `;
 
 const SearchSideMenu = ({ className, onClose }) => {

@@ -16,11 +16,24 @@ import Close from '~/icons/Close';
 import { InputAutocompleteTabs } from './styles';
 
 const Container = styled.div`
-  position: relative;
+  max-height: 99vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+`;
+
+const SearchDiv = styled.div`
+  flex: none;
+  padding: 0.5rem;
+`;
+
+const SuggestionDiv = styled.div`
+  flex: 1;
+  overflow: auto;
+  padding: 0.5rem;
 `;
 
 const SuggestionsMenu = styled(Menu)`
-  margin-top: 0.75rem;
   width: 100%;
   color: ${({ theme }) => theme.palette.base.main};
 `;
@@ -51,7 +64,8 @@ const CloseButton = styled.div`
 `;
 
 const SuggestionsMenuStyled = styled(SuggestionsMenu)`
-  max-height: unset;
+  max-height: -webkit-fill-available;
+  overflow: auto;
 `;
 
 const defaultRender = (item, value) => <Highlight key={item} text={item} query={value} />;
@@ -128,41 +142,45 @@ const InputAutocomplete = ({
 
   return (
     <Container ref={containerRef}>
-      <FlexRow>
-        <InputTextStyled
-          value={value}
-          invalid={invalid}
-          disabled={disabled}
-          prepend={prepend}
-          append={append}
-          placeholder={placeholder}
-          onClear={onClear}
-          onChange={onChange}
-        />
-        <CloseButton onClick={onClose}>
-          <Close />
-        </CloseButton>
-      </FlexRow>
-      <SuggestionsMenuStyled>
-        <ConditionalRender condition={Object.keys(items).length > 1}>
-          <InputAutocompleteTabs
-            tabs={Object.keys(items).map((key) => ({
-              value: key,
-              label: key,
-            }))}
-            activeTab={activeTab}
-            onChange={setActiveTab}
+      <SearchDiv>
+        <FlexRow>
+          <InputTextStyled
+            value={value}
+            invalid={invalid}
+            disabled={disabled}
+            prepend={prepend}
+            append={append}
+            placeholder={placeholder}
+            onClear={onClear}
+            onChange={onChange}
           />
-        </ConditionalRender>
-        <Suggestions
-          items={filtered}
-          append={LoadMoreButton}
-          maxHeight="unset"
-          onPick={onPickSuggestion}
-        >
-          {(item) => render(item, value, activeTab)}
-        </Suggestions>
-      </SuggestionsMenuStyled>
+          <CloseButton onClick={onClose}>
+            <Close />
+          </CloseButton>
+        </FlexRow>
+      </SearchDiv>
+      <SuggestionDiv>
+        <SuggestionsMenuStyled>
+          <ConditionalRender condition={Object.keys(items).length > 1}>
+            <InputAutocompleteTabs
+              tabs={Object.keys(items).map((key) => ({
+                value: key,
+                label: key,
+              }))}
+              activeTab={activeTab}
+              onChange={setActiveTab}
+            />
+          </ConditionalRender>
+          <Suggestions
+            items={filtered}
+            append={LoadMoreButton}
+            maxHeight="inherit"
+            onPick={onPickSuggestion}
+          >
+            {(item) => render(item, value, activeTab)}
+          </Suggestions>
+        </SuggestionsMenuStyled>
+      </SuggestionDiv>
     </Container>
   );
 };

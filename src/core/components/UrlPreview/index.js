@@ -81,7 +81,7 @@ const Image = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  height: 120px;
+  height: 220px;
 `;
 
 const SiteDetails = styled.div`
