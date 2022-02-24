@@ -51,7 +51,7 @@ const CategoryCommunitiesList = ({ categoryId }) => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  return windowDimensions.width > 768 ? (
+  return windowDimensions.width > 375 ? (
     <PaginatedList
       items={items}
       hasMore={hasMore}
