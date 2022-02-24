@@ -297,13 +297,17 @@ const PostCreatorBar = ({
       getUrlPreviewDetail(url)
         .then((data) => data.json())
         .then((data) => {
-          setUrlPreview({
-            title: data.title,
-            description: data.description,
-            siteName: data.siteName,
-            hostname: data.url,
-            imgUrl: data.images[0] ?? null,
-          });
+          if (!data) {
+            setCurrentUrl('');
+          } else {
+            setUrlPreview({
+              title: data.title,
+              description: data.description,
+              siteName: data.siteName,
+              hostname: data.url,
+              imgUrl: data.images[0] ?? null,
+            });
+          }
         });
     };
 

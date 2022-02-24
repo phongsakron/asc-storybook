@@ -118,13 +118,17 @@ const PostEditor = ({ postId, onSave, className, placeholder }) => {
       getUrlPreviewDetail(url)
         .then((respond) => respond.json())
         .then((respond) => {
-          setUrlPreview({
-            title: respond.title,
-            description: respond.description,
-            siteName: respond.siteName,
-            hostname: respond.url,
-            imgUrl: respond.images[0] ?? null,
-          });
+          if (!respond) {
+            setCurrentUrl('');
+          } else {
+            setUrlPreview({
+              title: respond.title,
+              description: respond.description,
+              siteName: respond.siteName,
+              hostname: respond.url,
+              imgUrl: respond.images[0] ?? null,
+            });
+          }
         });
     };
 
