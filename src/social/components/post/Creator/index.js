@@ -452,7 +452,15 @@ const PostCreatorBar = ({
             onMaxFilesLimit={onMaxFilesLimit}
             onFileSizeLimit={onFileSizeLimit}
           />
-          <PollButton onClick={openPollModal}>
+          <PollButton
+            disabled={
+              postFiles.length > 0 ||
+              postVideos.length > 0 ||
+              postImages.length > 0 ||
+              uploadLoading
+            }
+            onClick={openPollModal}
+          >
             <PollIconContainer>
               <PollIcon />
             </PollIconContainer>

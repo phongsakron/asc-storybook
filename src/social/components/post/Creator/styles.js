@@ -56,14 +56,37 @@ export const VideoAttachmentIcon = styled(PlayCircle)`
 export const PollButton = styled.button`
   background: none;
   border: none;
+  ${({ disabled, theme }) => disabled && `color: ${theme.palette.neutral.shade2};`}
 `;
 
 export const PollIconContainer = styled.div`
-  height: 14px;
+  cursor: pointer;
+  background: rgb(235 236 239 / 60%);
+  transition: background 0.1s;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  &:hover {
-    cursor: pointer;
+  &:hover,
+  &:focus,
+  &:active {
+    background: rgb(235 236 239);
   }
+
+  &.disabled {
+    cursor: not-allowed;
+  }
+
+  > svg {
+    height: 1.125rem;
+    width: 1.125rem;
+    font-size: 1.125rem;
+  }
+  ${({ uploadLoading }) => uploadLoading && 'cursor: wait !important;'}
+  ${({ disabled, theme }) => disabled && `color: ${theme.palette.neutral.shade2};`}
 `;
 
 export const PollIcon = styled(Poll)``;
