@@ -17,6 +17,9 @@ const CategoryCommunitiesPage = ({ categoryId }) => {
 
   const onBack = () => onChangePage(PageTypes.Explore);
 
+  document.getElementById('main').children[0].scrollTop = 0;
+  document.getElementById('app').children[0].scrollTop = 0;
+
   return (
     <PageContainer>
       <Header>
