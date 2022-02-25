@@ -88,7 +88,7 @@ const Community = () => {
   }, [page]);
 
   return (
-    <ApplicationContainer>
+    <ApplicationContainer id="app">
       <MainLayout
         header={
           isShowHeader ? (
