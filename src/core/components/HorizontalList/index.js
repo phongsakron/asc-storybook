@@ -53,7 +53,7 @@ const ScrollContainer = styled.div`
 const StretchedList = styled.div`
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: 100%;
+  // grid-auto-columns: 100%;
   grid-gap: ${ITEM_SPACE_SIZE}px;
 
   ${({ columns }) =>

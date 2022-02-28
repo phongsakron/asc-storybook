@@ -1,41 +1,15 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 
 import useKeyboard from '~/core/hooks/useKeyboard';
 import { MenuItem } from '~/core/components/Menu';
 import ConditionalRender from '~/core/components/ConditionalRender';
-
-const MenuList = styled.div`
-  flex: 1 1 auto;
-  z-index: 1;
-  position: relative;
-  display: block;
-  overflow-y: auto;
-  min-height: 3em;
-  max-height: 200px;
-  background: #fff;
-  border-radius: 4px;
-  cursor: pointer;
-`;
-
-const Placeholder = styled.div`
-  flex: 1 1 auto;
-  z-index: 1;
-  position: relative;
-  background: #fff;
-  padding: 18px 72px 18px 72px;
-  color: ${({ theme }) => theme.palette.base.shade3};
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
+import { MenuList, Placeholder } from './styles';
 
 const DefaultRenderer = (item) => <span>{item}</span>;
 
-const Suggestions = ({ items, onPick = () => {}, append, children }) => {
+const Suggestions = ({ items, onPick = () => {}, append, children, maxHeight = '200px' }) => {
   const list = useRef(null);
 
   const [active, setActive] = useState(-1);
@@ -86,7 +60,7 @@ const Suggestions = ({ items, onPick = () => {}, append, children }) => {
 
   return (
     <ConditionalRender condition={!!items.length}>
-      <MenuList ref={list} onMouseLeave={onMouseLeave}>
+      <MenuList ref={list} maxHeight={maxHeight} onMouseLeave={onMouseLeave}>
         {items.map((item, index) => (
           <MenuItem
             key={`#${index}`}
@@ -109,6 +83,7 @@ const Suggestions = ({ items, onPick = () => {}, append, children }) => {
 Suggestions.propTypes = {
   items: PropTypes.array.isRequired,
   append: PropTypes.node,
+  maxHeight: PropTypes.string,
   children: PropTypes.func,
   onPick: PropTypes.func,
 };

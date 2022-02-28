@@ -8,10 +8,10 @@ import { POSITION_LEFT } from '~/helpers/getCssPosition';
 import Button, { PrimaryButton } from '~/core/components/Button';
 import CommentLikeButton from '~/social/components/CommentLikeButton';
 import ConditionalRender from '~/core/components/ConditionalRender';
-import CommentText from './CommentText';
 
 import { backgroundImage as UserImage } from '~/icons/User';
 import BanIcon from '~/icons/Ban';
+import CommentText from './CommentText';
 
 import {
   Avatar,
@@ -116,7 +116,12 @@ const StyledComment = ({
               </PrimaryButton>
             </ButtonContainer>
           </CommentEditContainer>
-          <CommentText text={text} mentionees={mentionees} metadata={metadata} />
+          <CommentText
+            text={text}
+            mentionees={mentionees}
+            metadata={metadata}
+            itemKeyProp={commentId}
+          />
         </ConditionalRender>
 
         <ConditionalRender condition={!isEditing && (canLike || canReply || options.length > 0)}>
@@ -132,6 +137,10 @@ const StyledComment = ({
             </ConditionalRender>
             <OptionMenu options={options} pullRight={false} align={POSITION_LEFT} />
           </InteractionBar>
+        </ConditionalRender>
+
+        <ConditionalRender condition={!canReply}>
+          <div css="margin-top: 10px;" />
         </ConditionalRender>
       </Content>
     </>

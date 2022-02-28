@@ -3,7 +3,6 @@ import { FileRepository } from '@amityco/js-sdk';
 
 import styled from 'styled-components';
 import { readFileAsync } from '~/helpers';
-import { FileInput, Label } from './styles';
 
 import { backgroundImage as UserImage } from '~/icons/User';
 import CameraIcon from '~/icons/Camera';
@@ -13,6 +12,7 @@ import {
   AvatarUploadContainer,
   AvatarWrapper,
 } from '~/social/components/CommunityForm/styles';
+import { FileInput, Label } from './styles';
 
 const StyledCameraIcon = styled(CameraIcon)`
   font-size: 20px;
@@ -27,7 +27,7 @@ const StyledCameraIcon = styled(CameraIcon)`
 export const AvatarUpload = ({ disabled, setAvatarFileId, value }) => {
   const [avatar, setAvatar] = useState(value);
 
-  const upload = async (event) => {
+  const upload = async event => {
     event.persist();
     const imageUrl = await readFileAsync(event.target.files[0]);
     setAvatar(imageUrl);

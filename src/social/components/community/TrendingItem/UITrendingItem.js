@@ -14,7 +14,7 @@ const ItemContainer = styled.div`
   grid-template-columns: 118px auto;
   cursor: pointer;
   counter-increment: trending;
-  min-width: 425px;
+  // min-width: 425px;
   height: 118px;
   border: 1px solid #ebecef;
   border-radius: 8px;
@@ -110,7 +110,7 @@ const UITrendingItem = ({
             <ConditionalRender condition={categories.length > 0}>
               <Truncate lines={1}>
                 <Categories>
-                  {categories.map((category) => (
+                  {categories.map(category => (
                     <Category key={category.categoryId}>{category.name}</Category>
                   ))}
                 </Categories>

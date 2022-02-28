@@ -1,23 +1,42 @@
-import React, { memo, useState, useEffect, useMemo } from 'react';
+import React, { memo, useState, useEffect, useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { PostDataType, PostRepository } from '@amityco/js-sdk';
 import { FormattedMessage } from 'react-intl';
+import debounce from 'lodash/debounce';
 
 import usePost from '~/social/hooks/usePost';
 import useSocialMention from '~/social/hooks/useSocialMention';
+import { useConfig } from '~/social/providers/ConfigProvider';
 import Content from './Content';
-import { PostEditorContainer, Footer, ContentContainer, PostButton } from './styles';
+import {
+  PostEditorContainer,
+  Footer,
+  ContentContainer,
+  PostButton,
+  UrlPreviewContainer,
+  UrlPreviewStyled,
+} from './styles';
 
 const PostEditor = ({ postId, onSave, className, placeholder }) => {
   const { post, handleUpdatePost, childrenPosts = [] } = usePost(postId);
   const { data, dataType, targetId, targetType, metadata } = post;
-
   const { text, markup, mentions, clearAll, onChange, queryMentionees } = useSocialMention({
     targetId,
     targetType,
     remoteText: data?.text ?? '',
     remoteMarkup: metadata?.markupText ?? data?.text ?? '',
   });
+
+  // Url preview
+  const { apiUrlPreview } = useConfig();
+  const [urlPreview, setUrlPreview] = useState({
+    title: metadata?.urlPreview?.title ?? '',
+    description: metadata?.urlPreview?.description ?? '',
+    siteName: metadata?.urlPreview?.siteName ?? '',
+    hostname: metadata?.urlPreview?.hostname ?? '',
+    imgUrl: metadata?.urlPreview?.imgUrl ?? '',
+  });
+  const [currentUrl, setCurrentUrl] = useState('');
 
   // Children posts of the post being rendered with postId.
   const [localChildrenPosts, setLocalChildrenPosts] = useState(childrenPosts);
@@ -37,6 +56,11 @@ const PostEditor = ({ postId, onSave, className, placeholder }) => {
   const handleSave = () => {
     let mentionees = [];
     const postMetadata = {};
+    postMetadata.type = metadata.type;
+
+    if (metadata.type && metadata.type === 'text' && apiUrlPreview && currentUrl) {
+      postMetadata.urlPreview = urlPreview;
+    }
 
     if (mentions?.length > 0) {
       mentionees = [{}];
@@ -82,6 +106,51 @@ const PostEditor = ({ postId, onSave, className, placeholder }) => {
     [localChildrenPosts],
   );
 
+  useEffect(() => {
+    setCurrentUrl(metadata?.urlPreview?.hostname);
+  }, [metadata]);
+
+  useEffect(() => {
+    const getUrlPreviewDetail = (url) => {
+      return fetch(`${apiUrlPreview}?url=${url}`);
+    };
+    const doGetDetail = (url) => {
+      getUrlPreviewDetail(url)
+        .then((respond) => respond.json())
+        .then((respond) => {
+          if (!respond) {
+            setCurrentUrl('');
+          } else {
+            setUrlPreview({
+              title: respond.title ?? '',
+              description: respond.description ?? '',
+              siteName: respond.siteName ?? '',
+              hostname: respond.url ?? '',
+              imgUrl: respond.images[0] ?? '',
+            });
+          }
+        });
+    };
+
+    if (apiUrlPreview && currentUrl) {
+      doGetDetail(currentUrl);
+    } else {
+      setUrlPreview({
+        title: '',
+        description: '',
+        siteName: '',
+        hostname: '',
+        imgUrl: '',
+      });
+    }
+    return () => {};
+  }, [currentUrl, apiUrlPreview]);
+
+  const setUrl = useCallback((arg) => {
+    setCurrentUrl(arg);
+  }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const setUrlDebounce = useCallback(debounce(setUrl, 1000), [setUrl]);
   return (
     <PostEditorContainer className={className}>
       <ContentContainer>
@@ -90,8 +159,31 @@ const PostEditor = ({ postId, onSave, className, placeholder }) => {
           dataType={dataType}
           placeholder={placeholder}
           queryMentionees={queryMentionees}
-          onChange={onChange}
+          onChange={(newMarkup) => {
+            const regex = /(https?:\/\/[^\s]+|www\.[^\s]+\.[^\s]+)/g;
+            if (newMarkup.plainText && newMarkup.plainText.match(regex)) {
+              const url = newMarkup.plainText.match(regex)[0];
+              setUrlDebounce(url);
+            } else {
+              setUrlDebounce('');
+            }
+            onChange(newMarkup);
+          }}
         />
+        {metadata?.type === 'text' && currentUrl && (
+          <UrlPreviewContainer>
+            <UrlPreviewStyled
+              title={urlPreview.title}
+              description={urlPreview.description}
+              descriptionLength={urlPreview.descriptionLength}
+              siteName={urlPreview.siteName}
+              hostname={urlPreview.hostname}
+              imgUrl={urlPreview.imgUrl}
+              isShowCloseButton
+              onClose={() => setUrl('')}
+            />
+          </UrlPreviewContainer>
+        )}
         {childImagePosts.length > 0 && (
           <Content
             data={childImagePosts}

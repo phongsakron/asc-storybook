@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { IconWrapper, ButtonActionItem, AnchorActionItem } from './styles';
+import { IconWrapper, IconProfileWrapper, ButtonActionItem, AnchorActionItem } from './styles';
 
 export const ALLOWED_ELEMENTS = ['button', 'a'];
 
@@ -11,6 +11,7 @@ const ActionItemComponents = {
 
 const SideMenuActionItem = ({
   icon,
+  iconProfile,
   children,
   active,
   className,
@@ -27,6 +28,7 @@ const SideMenuActionItem = ({
       onClick={onClick}
     >
       {icon && <IconWrapper active={active}>{icon}</IconWrapper>}
+      {iconProfile && <IconProfileWrapper>{iconProfile}</IconProfileWrapper>}
       <span className="actionItemChild">{children}</span>
     </ActionItemContainer>
   );
@@ -35,6 +37,7 @@ const SideMenuActionItem = ({
 SideMenuActionItem.propTypes = {
   element: PropTypes.oneOf(ALLOWED_ELEMENTS),
   icon: PropTypes.node,
+  iconProfile: PropTypes.node,
   children: PropTypes.node,
   active: PropTypes.bool,
   className: PropTypes.string,

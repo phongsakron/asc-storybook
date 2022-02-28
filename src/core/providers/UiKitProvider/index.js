@@ -25,6 +25,7 @@ const UiKitProvider = forwardRef(
       apiKey,
       apiRegion,
       apiEndpoint,
+      apiUrlPreview,
       authToken,
       userId,
       displayName,
@@ -80,7 +81,6 @@ const UiKitProvider = forwardRef(
       }
 
       return { client };
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [apiKey, userId, displayName, authToken, preventReconnect]);
 
     useImperativeHandle(ref, () => ({
@@ -106,7 +106,7 @@ const UiKitProvider = forwardRef(
           <ThemeProvider theme={buildGlobalTheme(theme)}>
             <UIStyles>
               <SDKProvider {...SDKInfo}>
-                <ConfigProvider config={{ socialCommunityCreationButtonVisible }}>
+                <ConfigProvider config={{ socialCommunityCreationButtonVisible, apiUrlPreview }}>
                   <CustomComponentsProvider value={customComponents}>
                     <NavigationProvider {...actionHandlers}>
                       <PostRendererProvider postRenderers={postRenderers}>
@@ -129,6 +129,7 @@ const UiKitProvider = forwardRef(
 UiKitProvider.propTypes = {
   apiKey: PropTypes.string.isRequired,
   apiEndpoint: PropTypes.string.isRequired,
+  apiUrlPreview: PropTypes.string,
   apiRegion: PropTypes.string.isRequired,
   authToken: PropTypes.string,
   userId: PropTypes.string.isRequired,
@@ -143,6 +144,7 @@ UiKitProvider.propTypes = {
   actionHandlers: PropTypes.shape({
     onChangePage: PropTypes.func,
     onClickCategory: PropTypes.func,
+    onClickCategoryList: PropTypes.func,
     onClickCommunity: PropTypes.func,
     onClickUser: PropTypes.func,
     onCommunityCreated: PropTypes.func,

@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { PollStatus, PollAnswerType, PollRepository } from '@amityco/js-sdk';
 
+import { Chip } from '~/core/components/Radio/styles';
+import ConditionalRender from '~/core/components/ConditionalRender';
+import { useAsyncCallback } from '~/core/hooks/useAsyncCallback';
+import usePoll from '~/social/hooks/usePoll';
 import {
   VoteItemContainer,
   ResultItemContainer,
@@ -15,11 +19,6 @@ import {
   ProgressBarContainer,
   ProgressBar,
 } from './styles';
-
-import { Chip } from '~/core/components/Radio/styles';
-import ConditionalRender from '~/core/components/ConditionalRender';
-import { useAsyncCallback } from '~/core/hooks/useAsyncCallback';
-import usePoll from '~/social/hooks/usePoll';
 
 const MILLISECONDS_IN_DAY = 86400000;
 
@@ -80,22 +79,22 @@ const PollContent = ({ items }) => {
 
   const { formatMessage } = useIntl();
 
-  const handleCheck = (answerId) => {
+  const handleCheck = answerId => {
     if (answerIds.includes(answerId)) {
-      const index = answerIds.findIndex((id) => id === answerId);
-      setAnswerIds((prevAnswerIds) => [
+      const index = answerIds.findIndex(id => id === answerId);
+      setAnswerIds(prevAnswerIds => [
         ...prevAnswerIds.splice(0, index),
         ...prevAnswerIds.splice(index + 1),
       ]);
     } else if (canSelectMultiple) {
-      setAnswerIds((prevAnswerIds) => [...prevAnswerIds, answerId]);
+      setAnswerIds(prevAnswerIds => [...prevAnswerIds, answerId]);
     } else {
       setAnswerIds([answerId]);
     }
   };
 
   const [handleSubmit] = useAsyncCallback(
-    async (e) => {
+    async e => {
       e.preventDefault();
 
       if (isClosed || isDeleted) {

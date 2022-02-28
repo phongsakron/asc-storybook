@@ -2,6 +2,7 @@ import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { confirm } from '~/core/components/Confirm';
+import useCommunity from '~/social/hooks/useCommunity';
 import {
   ExtraActionContainer,
   ExtraActionContainerHeader,
@@ -11,8 +12,6 @@ import {
   PlusIcon,
   Footer,
 } from './styles';
-
-import useCommunity from '~/social/hooks/useCommunity';
 
 const ExtraAction = ({ title, bodyText, actionButton }) => {
   return (

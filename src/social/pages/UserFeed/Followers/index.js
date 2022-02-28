@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { FollowRequestStatus } from '@amityco/js-sdk';
 import * as utils from '~/helpers/utils';
 
-import { StyledTabs } from './styles';
 import ConditionalRender from '~/core/components/ConditionalRender';
 import withSDK from '~/core/hocs/withSDK';
 
@@ -13,6 +12,7 @@ import FollowersList from '~/social/pages/UserFeed/Followers/FollowersList';
 import PendingList from '~/social/pages/UserFeed/Followers/PendingList';
 import { FollowersTabs, PENDING_TAB } from '~/social/pages/UserFeed/Followers/constants';
 import useFollowersList from '~/core/hooks/useFollowersList';
+import { StyledTabs } from './styles';
 
 const Followers = ({
   currentUserId,
@@ -26,7 +26,7 @@ const Followers = ({
 
   const { formatMessage } = useIntl();
   const [allTabs, setAllTabs] = useState(
-    Object.values(FollowersTabs).map((value) => ({
+    Object.values(FollowersTabs).map(value => ({
       value,
       label: value,
     })),
@@ -40,7 +40,7 @@ const Followers = ({
     if (pendingUsers?.length && isMe && isPrivateNetwork) {
       setAllTabs(
         Object.values(FollowersTabs)
-          .map((value) => ({
+          .map(value => ({
             value,
             label: value,
           }))
@@ -51,7 +51,7 @@ const Followers = ({
       );
     } else {
       setAllTabs(
-        Object.values(FollowersTabs).map((value) => ({
+        Object.values(FollowersTabs).map(value => ({
           value,
           label: value,
         })),

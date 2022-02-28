@@ -10,7 +10,6 @@ import CommunityCategoryCard from '~/social/components/community/CategoryCard';
 const List = () => {
   const { onClickCategory } = useNavigation();
   const [categories, hasMore, loadMore, loading, loadingMore] = useCategories({ isDeleted: false });
-
   const items = useMemo(() => {
     function getLoadingItems() {
       return new Array(6).fill(1).map((x, index) => ({ categoryId: index, skeleton: true }));
@@ -30,7 +29,7 @@ const List = () => {
   return (
     <HorizontalList
       columns={{
-        1024: 3,
+        1024: 4,
         1280: 5,
         1440: 6,
         1800: 8,

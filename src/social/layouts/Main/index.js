@@ -9,10 +9,8 @@ const Container = styled.div`
   grid-template-areas: 'side main' 'none main';
   grid-template-columns: min-content auto;
   grid-template-rows: 100%;
-  grid-gap: 0 20px;
   width: 100%;
   height: 100%;
-  padding: 0 20px 0 0;
   background: #f7f7f8;
 `;
 
@@ -21,7 +19,6 @@ const Main = styled.div`
   overflow: auto;
   width: 100%;
   min-width: 20rem;
-  max-width: 90.75rem;
   margin: 0 auto;
 `;
 
@@ -30,12 +27,39 @@ const Side = styled.div`
   overflow: auto;
 `;
 
-const Layout = ({ aside, children }) => {
+const Header = styled.div`
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  background: #fff;
+  display: none;
+  @media (max-width: 768px) {
+    display: block;
+  }
+`;
+
+const LayoutContainer = styled.div`
+  height: inherit;
+  max-height: 100%;
+  width: 100%;
+  /* hidden scroll */
+  overflow: scroll;
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  ::-webkit-scrollbar {
+    display: none; /* for Chrome, Safari, and Opera */
+  }
+`;
+
+const Layout = ({ aside, header, children }) => {
   return (
-    <Container>
-      <Main>{children}</Main>
-      <Side>{aside}</Side>
-    </Container>
+    <LayoutContainer>
+      <Header>{header}</Header>
+      <Container>
+        <Main id="main">{children}</Main>
+        <Side>{aside}</Side>
+      </Container>
+    </LayoutContainer>
   );
 };
 
