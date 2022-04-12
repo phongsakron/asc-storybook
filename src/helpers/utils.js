@@ -1,3 +1,4 @@
+import isEmpty from 'lodash/isEmpty';
 import { CommunityUserMembership, PostTargetType } from '@amityco/js-sdk';
 
 export function stripUndefinedValues(obj) {
@@ -83,9 +84,9 @@ export function extractMetadata(markup, mentions) {
     mentionees = [{}];
 
     metadata.mentioned = [
-      ...mentions.map(({ plainTextIndex, id, index: markupIndex }) => ({
+      ...mentions.map(({ plainTextIndex, id, index: markupIndex, display: displayName }) => ({
         index: plainTextIndex,
-        length: id.length,
+        length: displayName.length,
         type: 'user',
         userId: id,
         markupIndex,
@@ -97,4 +98,22 @@ export function extractMetadata(markup, mentions) {
   }
 
   return { metadata, mentionees };
+}
+
+export function parseMentionsMarkup(text, metadata) {
+  if (isEmpty(metadata?.mentioned)) return text;
+
+  let parsedText = text;
+  const { mentioned } = metadata;
+
+  mentioned.forEach(({ userId, length, index: textIndex }) => {
+    const startOfName = textIndex + 1; // compensate @
+    const endOfName = textIndex + length + 1;
+    const displayName = text.substring(startOfName, endOfName);
+    const markupFormat = `[${displayName}](${userId})`;
+
+    parsedText = parsedText.replace(displayName, markupFormat);
+  });
+
+  return parsedText;
 }

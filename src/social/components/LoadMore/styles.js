@@ -36,7 +36,7 @@ export const LoadMoreButton = styled(Button)`
   }
 `;
 
-export const ShevronDownIcon = styled(ChevronDown)`
-  font-size: 16px;
+export const ShevronDownIcon = styled(ChevronDown).attrs({ height: 14, width: 14 })`
+  vertical-align: middle;
   margin-left: 5px;
 `;

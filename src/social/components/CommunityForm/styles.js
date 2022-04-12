@@ -5,7 +5,7 @@ import { ErrorMessage as FormErrorMessage } from '@hookform/error-message';
 import { PrimaryButton } from '~/core/components/Button';
 import ImageUploader from '~/core/components/Uploaders/Image';
 import UIAvatar from '~/core/components/Avatar';
-import { ChevronDown, Close, Globe, Lock } from '~/icons';
+import { Close, Globe, Lock } from '~/icons';
 
 const ErrorMessageWrapper = styled.div`
   margin-top: 8px;
@@ -19,18 +19,13 @@ export const InputPlaceholder = styled.span`
   color: ${({ theme }) => theme.palette.base.shade1};
 `;
 
-export const WorldIcon = styled(Globe)`
-  font-size: 20px;
-`;
+export const WorldIcon = styled(Globe).attrs({ width: 20, height: 20 })``;
 
-export const LockIcon = styled(Lock)`
-  font-size: 20px;
-`;
+export const LockIcon = styled(Lock).attrs({ width: 20, height: 20 })``;
 
-export const CloseIcon = styled(Close)`
-  font-size: 12px;
+export const CloseIcon = styled(Close).attrs({ width: 12, height: 12 })`
   padding: 5px 12px;
-  color: ${({ theme }) => theme.palette.base.shade1};
+  fill: ${({ theme }) => theme.palette.base.shade1};
 `;
 
 export const Selector = styled.div`
@@ -252,9 +247,12 @@ export const TextField = styled.input`
   }
 `;
 
-export const SelectIcon = styled(ChevronDown)`
-  font-size: 16px;
+export const ChevronDownContainer = styled.span`
   margin-left: auto;
+
+  svg {
+    vertical-align: middle;
+  }
 `;
 
 export const Field = styled.div`

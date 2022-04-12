@@ -12,10 +12,10 @@ import CommentList from '~/social/components/CommentList';
 import ConditionalRender from '~/core/components/ConditionalRender';
 import { notification } from '~/core/components/Notification';
 import { isModerator } from '~/helpers/permissions';
-import StyledComment from './Comment.styles';
 import useSocialMention from '~/social/hooks/useSocialMention';
 import usePost from '~/social/hooks/usePost';
 
+import { extractMetadata, parseMentionsMarkup } from '~/helpers/utils';
 import {
   CommentBlock,
   CommentContainer,
@@ -27,7 +27,7 @@ import {
   IconContainer,
   MessageContainer,
 } from './styles';
-import { extractMetadata } from '../../../helpers/utils';
+import StyledComment from './Comment.styles';
 
 const REPLIES_PER_PAGE = 5;
 
@@ -95,7 +95,7 @@ const Comment = ({ readonly = false, commentId, currentUserId, userRoles }) => {
     targetId: post?.targetId,
     targetType: post?.targetType,
     remoteText: comment?.data?.text ?? '',
-    remoteMarkup: comment?.metadata?.markupText ?? comment?.data?.text ?? '',
+    remoteMarkup: parseMentionsMarkup(comment?.data?.text, comment?.metadata),
   });
 
   const onReportClick = async () => {

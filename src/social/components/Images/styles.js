@@ -17,9 +17,8 @@ export const CircleButton = styled.button`
   border: none;
 `;
 
-export const CloseIcon = styled(Close)`
+export const CloseIcon = styled(Close).attrs({ width: 18, height: 18 })`
   color: #fff;
-  font-size: 18px;
 `;
 
 export const ImageContainer = styled.div`
@@ -136,7 +135,7 @@ export const NumberOfHiddenImagesOverlay = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  ${({ theme }) => theme.typography.headline}
+  ${({ theme }) => theme.typography.headline};
   font-size: 32px;
 `;
 
@@ -150,8 +149,7 @@ export const FileInput = styled.input.attrs({ type: 'file' })`
 
 export const Label = styled.label``;
 
-export const ImageIcon = styled(ImageAttachment)`
-  font-size: 18px;
+export const ImageIcon = styled(ImageAttachment).attrs({ width: 18, height: 18 })`
   cursor: pointer;
 
   ${({ disabled, theme }) =>

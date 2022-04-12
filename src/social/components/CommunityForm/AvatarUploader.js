@@ -9,9 +9,8 @@ import { backgroundImage as communityCoverPlaceholder } from '~/icons/CommunityC
 import CameraIcon from '~/icons/Camera';
 
 const StyledCameraIcon = styled(CameraIcon)`
-  font-size: 20px;
   z-index: 3;
-  color: #fff;
+  fill: #fff;
 `;
 
 const AvatarUploadContainer = styled.div`
@@ -99,7 +98,7 @@ const AvatarUploader = ({ mimeType, onChange, value: avatarFileId }) => {
       <BgImage src={fileUrl ?? communityCoverPlaceholder} />
       <CoverImageLoader mimeType={mimeType} onChange={(newAvatar) => setLoadedAvatar(newAvatar)}>
         <AvatarUploadButton>
-          <StyledCameraIcon /> &nbsp; Upload image
+          <StyledCameraIcon width={20} height={20} /> &nbsp; Upload image
         </AvatarUploadButton>
       </CoverImageLoader>
     </AvatarUploadContainer>

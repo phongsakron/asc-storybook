@@ -37,18 +37,18 @@ export const Content = styled.div`
 `;
 
 export const FileSize = styled.div`
-  ${({ theme }) => theme.typography.caption}
+  ${({ theme }) => theme.typography.caption};
   color: ${({ theme }) => theme.palette.base.shade1};
 `;
 
 export const FileName = styled.div`
-  ${({ theme }) => theme.typography.bodyBold}
+  ${({ theme }) => theme.typography.bodyBold};
   margin-left: 8px;
   margin-right: 4px;
 `;
 
 export const ViewAllFilesButton = styled(SecondaryButton)`
-  ${({ theme }) => theme.typography.body}
+  ${({ theme }) => theme.typography.body};
   display: block;
   color: ${({ theme }) => theme.palette.primary.main};
   margin-top: 4px;
@@ -69,8 +69,7 @@ export const FileInput = styled.input.attrs({ type: 'file' })`
 
 export const Label = styled.label``;
 
-export const FileIcon = styled(FileAttachment)`
-  font-size: 18px;
+export const FileIcon = styled(FileAttachment).attrs({ width: 18, height: 18 })`
   cursor: pointer;
 
   ${({ disabled, theme }) =>

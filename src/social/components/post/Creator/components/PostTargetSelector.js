@@ -13,8 +13,7 @@ import { SortDown } from '~/icons';
 import { backgroundImage as UserImage } from '~/icons/User';
 import { backgroundImage as CommunityImage } from '~/icons/Community';
 
-const SelectIcon = styled(SortDown)`
-  font-size: 18px;
+const SelectIcon = styled(SortDown).attrs({ width: 18, height: 18 })`
   margin-right: 8px;
   margin-top: -4px;
 `;
@@ -30,7 +29,7 @@ const PostTargetSelectorContainer = styled.div`
 `;
 
 const CommunitySeparator = styled.div`
-  ${({ theme }) => theme.typography.caption}
+  ${({ theme }) => theme.typography.caption};
   border-top: 1px solid #e3e4e8;
   color: ${({ theme }) => theme.palette.base.shade1};
   padding: 12px;

@@ -43,7 +43,7 @@ const UIPostHeader = ({
           </Name>
         </TruncateMarkup>
 
-        {isBanned && <BanIcon />}
+        {isBanned && <BanIcon height={14} width={14} />}
 
         {postTargetName && !hidePostTarget && (
           <>
@@ -62,7 +62,7 @@ const UIPostHeader = ({
       <AdditionalInfo showTime={!!timeAgo}>
         {isModerator && (
           <ModeratorBadge>
-            <ShieldIcon /> <FormattedMessage id="moderator" />
+            <ShieldIcon width={14} height={14} /> <FormattedMessage id="moderator" />
           </ModeratorBadge>
         )}
 

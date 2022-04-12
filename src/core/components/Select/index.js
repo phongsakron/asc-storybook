@@ -20,7 +20,7 @@ const triggerRenderer = ({ placeholder, selected, ...props }) => {
         </ItemsContainer>
         <div>{placeholder}</div>
       </ConditionalRender>
-      <ChevronDown />
+      <ChevronDown height={14} width={14} />
     </DefaultTrigger>
   );
 };

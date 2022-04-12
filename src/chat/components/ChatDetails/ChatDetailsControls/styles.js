@@ -38,25 +38,21 @@ export const ControlItemState = styled.span`
   color: ${({ theme }) => theme.palette.neutral.shade3};
 `;
 
-export const ControlItemArrowRight = styled(ChevronRight)`
-  width: 16px !important;
+export const ControlItemArrowRight = styled(ChevronRight).attrs({ width: 16, height: 12 })`
   padding-left: 8px;
-  font-size: 12px;
   color: ${({ theme }) => theme.palette.neutral.shade3};
 `;
 
 const controlIconStyle = css`
-  width: 24px !important;
   padding-right: 8px;
-  font-size: 20px;
   text-align: center;
-  color: ${({ theme }) => theme.palette.neutral.main};
+  fill: ${({ theme }) => theme.palette.neutral.main};
 `;
 
-export const MembersIcon = styled(UserRegular)`
+export const MembersIcon = styled(UserRegular).attrs({ width: 24, height: 20 })`
   ${controlIconStyle}
 `;
 
-export const GroupSettingIcon = styled(Pencil)`
+export const GroupSettingIcon = styled(Pencil).attrs({ width: 24, height: 20 })`
   ${controlIconStyle}
 `;

@@ -26,13 +26,13 @@ import { backgroundImage as UserImage } from '~/icons/User';
 import { backgroundImage as CommunityImage } from '~/icons/Community';
 import { useNavigation } from '~/social/providers/NavigationProvider';
 
+import { extractMetadata, formatMentionees } from '~/helpers/utils';
+import PollModal from '~/social/components/post/PollComposer/PollModal';
 import PostTargetSelector from './components/PostTargetSelector';
 import UploaderButtons from './components/UploaderButtons';
 import ImagesUploaded from './components/ImagesUploaded';
 import VideosUploaded from './components/VideosUploaded';
 import FilesUploaded from './components/FilesUploaded';
-
-import { formatMentionees } from '~/helpers/utils';
 
 import { createPost, showPostCreatedNotification } from './utils';
 import {
@@ -47,7 +47,6 @@ import {
   PollIcon,
   PollIconContainer,
 } from './styles';
-import PollModal from '~/social/components/post/PollComposer/PollModal';
 import { MAXIMUM_POST_CHARACTERS, MAXIMUM_POST_MENTIONEES } from './constants';
 
 const communityFetcher = (id) => () => CommunityRepository.communityForId(id);
@@ -170,18 +169,9 @@ const PostCreatorBar = ({
 
     if (postMentionees.type && postMentionees.userIds.length > 0) {
       createPostParams.mentionees = [{ ...postMentionees }];
-      metadata.mentioned = [
-        ...mentionees.map(({ plainTextIndex, id, index: markupIndex }) => ({
-          index: plainTextIndex,
-          length: id.length,
-          type: 'user',
-          userId: id,
-          markupIndex,
-          postWithMarkup: postText,
-        })),
-      ];
+      const { metadata: extractedMetadata } = extractMetadata(postText, mentionees);
       metadata.markupText = postText;
-      createPostParams.metadata = metadata;
+      createPostParams.metadata = { ...metadata, ...extractedMetadata };
     }
 
     const post = await createPost(createPostParams);

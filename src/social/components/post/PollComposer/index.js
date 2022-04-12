@@ -4,6 +4,15 @@ import { PollAnswerType } from '@amityco/js-sdk';
 import { useForm, Controller } from 'react-hook-form';
 import useSocialMention from '~/social/hooks/useSocialMention';
 
+import OptionsComposer from '~/social/components/post/PollComposer/OptionsComposer';
+import { useAsyncCallback } from '~/core/hooks/useAsyncCallback';
+import InputCounter, { COUNTER_VALUE_PLACEHOLDER } from '~/core/components/InputCounter';
+import AnswerTypeSelector from '~/social/components/post/PollComposer/AnswerTypeSelector';
+import useElement from '~/core/hooks/useElement';
+import Button from '~/core/components/Button';
+import { extractMetadata } from '~/helpers/utils';
+import { MAXIMUM_MENTIONEES } from '~/social/constants';
+import { info } from '~/core/components/Confirm';
 import {
   PollComposerContainer,
   Form,
@@ -22,16 +31,6 @@ import {
   LabelWrapper,
   MentionTextInput,
 } from './styles';
-
-import OptionsComposer from '~/social/components/post/PollComposer/OptionsComposer';
-import { useAsyncCallback } from '~/core/hooks/useAsyncCallback';
-import InputCounter, { COUNTER_VALUE_PLACEHOLDER } from '~/core/components/InputCounter';
-import AnswerTypeSelector from '~/social/components/post/PollComposer/AnswerTypeSelector';
-import useElement from '~/core/hooks/useElement';
-import Button from '~/core/components/Button';
-import { extractMetadata } from '~/helpers/utils';
-import { MAXIMUM_MENTIONEES } from '~/social/constants';
-import { info } from '~/core/components/Confirm';
 
 const MAX_QUESTION_LENGTH = 500;
 const MIN_OPTIONS_AMOUNT = 2;
@@ -87,15 +86,6 @@ const PollComposer = ({
   useEffect(() => setDirtyExternal(isDirty), [isDirty, setDirtyExternal]);
 
   const [validateAndSubmit, submitting] = useAsyncCallback(async (data) => {
-    if (mentions?.length > MAXIMUM_MENTIONEES) {
-      return info({
-        title: <FormattedMessage id="pollComposer.unableToMention" />,
-        content: <FormattedMessage id="pollComposer.overMentionees" />,
-        okText: <FormattedMessage id="pollComposer.okText" />,
-        type: 'info',
-      });
-    }
-
     if (!data.question.trim()) {
       setError('question', { message: 'Question cannot be empty' });
       return;
@@ -117,6 +107,7 @@ const PollComposer = ({
       question: data?.question,
       answers: data?.answers?.length ? data.answers : undefined,
       answerType: data?.answerType || PollAnswerType.Single,
+      // eslint-disable-next-line no-unsafe-optional-chaining
       closedIn: data?.closedIn * MILLISECONDS_IN_DAY,
     };
 
@@ -161,8 +152,16 @@ const PollComposer = ({
                       value={markup}
                       queryMentionees={queryMentionees}
                       placeholder={formatMessage({ id: 'poll_composer.question.placeholder' })}
-                      onChange={({ plainText, ...args }) => {
-                        mentionOnChange({ plainText, ...args });
+                      onChange={({ plainText, mentions: mentionUsers, ...args }) => {
+                        if (mentionUsers?.length > MAXIMUM_MENTIONEES) {
+                          return info({
+                            title: <FormattedMessage id="pollComposer.unableToMention" />,
+                            content: <FormattedMessage id="pollComposer.overMentionees" />,
+                            okText: <FormattedMessage id="pollComposer.okText" />,
+                            type: 'info',
+                          });
+                        }
+                        mentionOnChange({ plainText, mentions: mentionUsers, ...args });
                         pollOnChange(plainText);
                       }}
                     />

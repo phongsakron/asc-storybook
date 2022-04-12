@@ -14,6 +14,13 @@ import { FollowersTabs, PENDING_TAB } from '~/social/pages/UserFeed/Followers/co
 import { useSDK } from '~/core/hocs/withSDK';
 import BanIcon from '~/icons/Ban';
 
+import { UserFeedTabs } from '~/social/pages/UserFeed/constants';
+import { confirm } from '~/core/components/Confirm';
+import useUser from '~/core/hooks/useUser';
+import useReport from '~/social/hooks/useReport';
+import { useAsyncCallback } from '~/core/hooks/useAsyncCallback';
+import { notification } from '~/core/components/Notification';
+import useFollowersList from '~/core/hooks/useFollowersList';
 import {
   Avatar,
   Container,
@@ -34,14 +41,6 @@ import {
   ActionButtonContainer,
   ProfileNameWrapper,
 } from './styles';
-
-import { UserFeedTabs } from '~/social/pages/UserFeed/constants';
-import { confirm } from '~/core/components/Confirm';
-import useUser from '~/core/hooks/useUser';
-import useReport from '~/social/hooks/useReport';
-import { useAsyncCallback } from '~/core/hooks/useAsyncCallback';
-import { notification } from '~/core/components/Notification';
-import useFollowersList from '~/core/hooks/useFollowersList';
 
 const UIUserInfo = ({
   userId,
@@ -140,7 +139,9 @@ const UIUserInfo = ({
         <Truncate lines={3}>
           <ProfileName>{displayName}</ProfileName>
         </Truncate>
-        {user.isGlobalBan && <BanIcon css="margin-left: 0.265rem; margin-top: 1px;" />}
+        {user.isGlobalBan && (
+          <BanIcon width={14} height={14} css="margin-left: 0.265rem; margin-top: 1px;" />
+        )}
       </ProfileNameWrapper>
       <CountContainer>
         <ClickableCount

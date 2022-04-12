@@ -1,11 +1,9 @@
 import styled from 'styled-components';
-import { FontAwesomeIcon as FaIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { Bars } from '~/icons';
 
-export const DetailsIcon = styled(FaIcon).attrs({ icon: faBars })`
-  font-size: 16px;
+export const DetailsIcon = styled(Bars).attrs({ width: 16, height: 16 })`
   cursor: pointer;
-  color: ${({ theme }) => theme.palette.neutral.main};
+  fill: ${({ theme }) => theme.palette.neutral.main};
   align-self: center;
 `;
 

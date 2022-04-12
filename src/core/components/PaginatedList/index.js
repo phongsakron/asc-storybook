@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import ConditionalRender from '~/core/components/ConditionalRender';
 import ChevronDown from '~/icons/ChevronDown';
 
+import { ChevronDownContainer } from '~/core/components/PaginatedList/styles';
+
 const DefaultContainer = styled.div``;
 
 const LoadMore = styled.button`
@@ -46,7 +48,10 @@ const PaginatedList = ({
       </Container>
       <ConditionalRender condition={hasMore}>
         <LoadMore onClick={onClick}>
-          <FormattedMessage id="loadMore" /> <ChevronDown height=".8em" />
+          <FormattedMessage id="loadMore" />
+          <ChevronDownContainer>
+            <ChevronDown height={14} width={14} />
+          </ChevronDownContainer>
         </LoadMore>
       </ConditionalRender>
     </div>

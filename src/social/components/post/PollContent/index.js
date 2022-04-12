@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { PollStatus, PollAnswerType, PollRepository } from '@amityco/js-sdk';
 
+import { Chip } from '~/core/components/Radio/styles';
+import ConditionalRender from '~/core/components/ConditionalRender';
+import { useAsyncCallback } from '~/core/hooks/useAsyncCallback';
+import usePoll from '~/social/hooks/usePoll';
 import {
   VoteItemContainer,
   ResultItemContainer,
@@ -15,11 +19,6 @@ import {
   ProgressBarContainer,
   ProgressBar,
 } from './styles';
-
-import { Chip } from '~/core/components/Radio/styles';
-import ConditionalRender from '~/core/components/ConditionalRender';
-import { useAsyncCallback } from '~/core/hooks/useAsyncCallback';
-import usePoll from '~/social/hooks/usePoll';
 
 const MILLISECONDS_IN_DAY = 86400000;
 
@@ -68,6 +67,7 @@ const ResultList = ({ answers, totalVotes }) => {
 };
 
 const PollContent = ({ items }) => {
+  // eslint-disable-next-line no-unsafe-optional-chaining
   const { pollId } = items[0]?.data;
   const { poll } = usePoll(pollId);
   const { answers = [], answerType, closedIn, isDeleted, isVoted, status } = poll;

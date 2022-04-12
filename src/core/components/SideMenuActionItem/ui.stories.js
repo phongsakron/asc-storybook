@@ -22,7 +22,7 @@ ActionItem.args = {
   children: 'children slot',
   active: false,
   showIcon: true,
-  icon: <Plus height="20px" />,
+  icon: <Plus height={20} />,
 };
 
 ActionItem.argTypes = {

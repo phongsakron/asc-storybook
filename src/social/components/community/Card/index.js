@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
+import useImage from '~/core/hooks/useImage';
 
 import useCommunity from '~/social/hooks/useCommunity';
 
@@ -7,7 +8,8 @@ import UICommunityCard from './UICommunityCard';
 
 const CommunityCard = ({ communityId, onClick, ...props }) => {
   const { community, file, communityCategories } = useCommunity(communityId);
-  const { fileUrl } = file;
+  const { fileId } = file;
+  const fileUrl = useImage({ fileId });
 
   const { membersCount, description } = community;
 

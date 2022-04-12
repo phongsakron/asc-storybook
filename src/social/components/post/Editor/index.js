@@ -5,6 +5,7 @@ import { FormattedMessage } from 'react-intl';
 
 import usePost from '~/social/hooks/usePost';
 import useSocialMention from '~/social/hooks/useSocialMention';
+import { parseMentionsMarkup } from '~/helpers/utils';
 import Content from './Content';
 import { PostEditorContainer, Footer, ContentContainer, PostButton } from './styles';
 
@@ -16,7 +17,7 @@ const PostEditor = ({ postId, onSave, className, placeholder }) => {
     targetId,
     targetType,
     remoteText: data?.text ?? '',
-    remoteMarkup: metadata?.markupText ?? data?.text ?? '',
+    remoteMarkup: parseMentionsMarkup(data?.text, metadata),
   });
 
   // Children posts of the post being rendered with postId.

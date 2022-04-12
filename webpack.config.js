@@ -1,17 +1,11 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const nodeExternals = require('webpack-node-externals');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { DefinePlugin } = require('webpack');
 const pkg = require('./package.json');
 
 module.exports = (_, argv = {}) => ({
   entry: './src/index.js',
-  externals: [
-    nodeExternals({
-      allowlist: [/@fortawesome\/pro/],
-    }),
-  ],
   output: {
     filename: 'index.js',
     path: path.resolve(__dirname, 'build'),

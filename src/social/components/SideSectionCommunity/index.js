@@ -9,13 +9,9 @@ import SideMenuSection from '~/core/components/SideMenuSection';
 import { useNavigation } from '~/social/providers/NavigationProvider';
 import SideMenuActionItem from '~/core/components/SideMenuActionItem';
 
-export const NewsIcon = styled(Newspaper)`
-  font-size: 20px;
-`;
+export const NewsIcon = styled(Newspaper).attrs({ width: 20, height: 20 })``;
 
-export const SearchIcon = styled(Search)`
-  font-size: 20px;
-`;
+export const SearchIcon = styled(Search).attrs({ width: 20, height: 20 })``;
 
 const SideSectionCommunity = ({ shouldHideExplore, children }) => {
   const { onChangePage, page } = useNavigation();

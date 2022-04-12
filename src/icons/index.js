@@ -21,6 +21,7 @@ export { default as CommunityCoverPicture } from './CommunityCoverPicture';
 export { default as Minus } from './Minus';
 export { default as Poll } from './Poll';
 export { default as CircleRemove } from './CircleRemove';
+export { default as Bars } from './Bars';
 
 // files
 export { default as AudioFile } from './files/Audio';

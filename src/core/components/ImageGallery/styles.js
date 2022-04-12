@@ -64,7 +64,7 @@ export const Frame = styled.div`
 
 export const Counter = styled.div`
   grid-area: counter;
-  ${({ theme }) => theme.typography.headline}
+  ${({ theme }) => theme.typography.headline};
   text-align: center;
 `;
 
@@ -87,19 +87,19 @@ const InvisibleButton = styled.button`
 
 export const LeftButton = (props) => (
   <InvisibleButton rel="left" {...props}>
-    <ChevronLeft height="24px" />
+    <ChevronLeft height={24} />
   </InvisibleButton>
 );
 
 export const RightButton = (props) => (
   <InvisibleButton rel="right" {...props}>
-    <ChevronRight height="24px" />
+    <ChevronRight height={24} />
   </InvisibleButton>
 );
 
 export const CloseButton = styled((props) => (
   <InvisibleButton rel="close" {...props}>
-    <Remove height="20px" />
+    <Remove height={20} />
   </InvisibleButton>
 ))`
   background: rgba(0, 0, 0, 0.3);

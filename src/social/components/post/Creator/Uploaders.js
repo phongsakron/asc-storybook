@@ -27,7 +27,7 @@ const PostCreatorUploaders = ({
       onChange={onChangeImages}
       onMaxFilesLimit={onMaxFilesLimit}
     >
-      <ImageAttachmentIcon height="20px" />
+      <ImageAttachmentIcon height={20} />
     </StyledLoader>
 
     <StyledLoader
@@ -38,7 +38,7 @@ const PostCreatorUploaders = ({
       onChange={onChangeFiles}
       onMaxFilesLimit={onMaxFilesLimit}
     >
-      <FileAttachmentIcon height="18px" />
+      <FileAttachmentIcon height={18} />
     </StyledLoader>
   </>
 );

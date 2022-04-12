@@ -49,7 +49,7 @@ export const VideoPreview = styled(
     </video>
   )),
 )`
-  ${VideoPreviewContainerStyles}
+  ${VideoPreviewContainerStyles};
   cursor: pointer;
 `;
 
@@ -84,10 +84,9 @@ export const RemoveButton = styled(Button).attrs({
   right: 0.5em;
 `;
 
-export const CircleIcon = styled(ExclamationCircle)`
+export const CircleIcon = styled(ExclamationCircle).attrs({ width: 24, height: 24 })`
   z-index: 2;
   opacity: 0.7;
-  font-size: 24px;
 `;
 
 export const RetryButton = styled(Button).attrs({

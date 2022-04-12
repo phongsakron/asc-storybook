@@ -3,7 +3,6 @@ import { FileRepository } from '@amityco/js-sdk';
 
 import styled from 'styled-components';
 import { readFileAsync } from '~/helpers';
-import { FileInput, Label } from './styles';
 
 import { backgroundImage as UserImage } from '~/icons/User';
 import CameraIcon from '~/icons/Camera';
@@ -13,15 +12,15 @@ import {
   AvatarUploadContainer,
   AvatarWrapper,
 } from '~/social/components/CommunityForm/styles';
+import { FileInput, Label } from './styles';
 
 const StyledCameraIcon = styled(CameraIcon)`
-  font-size: 20px;
   z-index: 3;
   position: absolute;
   left: 22px;
   top: 20px;
   cursor: pointer;
-  color: #fff;
+  fill: #fff;
 `;
 
 export const AvatarUpload = ({ disabled, setAvatarFileId, value }) => {

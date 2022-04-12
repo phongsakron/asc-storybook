@@ -5,13 +5,11 @@ import { PrimaryButton } from '~/core/components/Button';
 import { Plus, Pencil } from '~/icons';
 import SocialCommunityName from '~/social/components/community/Name';
 
-export const PlusIcon = styled(Plus)`
-  font-size: 15px;
+export const PlusIcon = styled(Plus).attrs({ width: 15, height: 15 })`
   margin-right: 8px;
 `;
 
-export const PencilIcon = styled(Pencil)`
-  font-size: 15px;
+export const PencilIcon = styled(Pencil).attrs({ width: 15, height: 15 })`
   margin-right: 4px;
 `;
 
@@ -56,7 +54,7 @@ export const CoverContent = styled.div`
 
 export const CommunityName = styled(SocialCommunityName)`
   color: #ffffff;
-  ${({ theme }) => theme.typography.headline}
+  ${({ theme }) => theme.typography.headline};
   line-height: 30px !important;
 
   * {

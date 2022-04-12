@@ -51,6 +51,7 @@ const ScrollContainer = styled.div`
 `;
 
 const StretchedList = styled.div`
+  margin-bottom: 0.188rem; // give the shadow a little space
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: 100%;
@@ -113,10 +114,10 @@ const HorizontalList = ({
         {hasMultiPage && (
           <Pagination>
             <PaginationButton disabled={isFirstPage} onClick={() => setPage(page - 1)}>
-              <ChevronLeftIcon height="20px" />
+              <ChevronLeftIcon height={20} />
             </PaginationButton>
             <PaginationButton disabled={isLastPage} onClick={() => setPage(page + 1)}>
-              <ChevronRightIcon height="20px" />
+              <ChevronRightIcon height={20} />
             </PaginationButton>
           </Pagination>
         )}

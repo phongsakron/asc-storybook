@@ -6,11 +6,7 @@ import { ExclamationCircle } from '~/icons';
 import { backgroundImage as livestreamCoverBackground } from '~/icons/LivestreamCover';
 import { Message, Thumbnail, VideoPlayerMock } from './styles';
 
-const CircleIcon = styled(ExclamationCircle)`
-  && {
-    font-size: 24px;
-  }
-`;
+const CircleIcon = styled(ExclamationCircle).attrs({ width: 24, height: 24 })``;
 
 export const LivestreamOverlayElements = styled.div`
   position: absolute;

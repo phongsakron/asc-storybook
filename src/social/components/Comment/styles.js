@@ -141,9 +141,7 @@ export const DeletedReplyContainer = styled.div`
   padding: 4px 8px 2px 0px;
 `;
 
-export const DeletedIcon = styled(MinusCircle)`
-  font-size: 18px;
-`;
+export const DeletedIcon = styled(MinusCircle).attrs({ width: 18, height: 18 })``;
 
 export const IconContainer = styled.div`
   display: flex;
@@ -171,8 +169,7 @@ export const LikeButton = styled(SecondaryButton)`
   }
 `;
 
-export const ReplyIcon = styled(Reply)`
-  font-size: 16px;
+export const ReplyIcon = styled(Reply).attrs({ width: 16, height: 16 })`
   margin-right: 5px;
 `;
 
@@ -207,5 +204,6 @@ export const CommentEditTextarea = styled(InputText).attrs({ rows: 1, maxRows: 1
 `;
 
 export const Highlighted = styled.span`
+  cursor: pointer;
   color: ${({ theme }) => theme.palette.primary.main};
 `;

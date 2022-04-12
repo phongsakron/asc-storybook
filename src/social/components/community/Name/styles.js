@@ -1,15 +1,13 @@
 import styled, { css } from 'styled-components';
 import { Lock, Verified } from '~/icons';
 
-export const PrivateIcon = styled(Lock)`
+export const PrivateIcon = styled(Lock).attrs({ width: 16, height: 16 })`
   margin-right: 8px;
-  font-size: 16px;
 `;
 
-export const VerifiedIcon = styled(Verified)`
+export const VerifiedIcon = styled(Verified).attrs({ width: 16, height: 16 })`
   margin-left: 8px;
-  font-size: 16px;
-  color: #1253de;
+  fill: #1253de;
 `;
 
 // the padding-right is to avoid cutting too short when the name ends with an emoji (due to the flex + text-overflow combination)

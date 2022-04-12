@@ -18,8 +18,7 @@ export const StyledLikeButton = styled(SecondaryButton)`
   }
 `;
 
-export const LikeIcon = styled(ThumbsUp)`
-  font-size: 16px;
+export const LikeIcon = styled(ThumbsUp).attrs({ width: 16, height: 16 })`
   ${({ $isLiked }) => $isLiked && isLikedStyle}
 `;
 

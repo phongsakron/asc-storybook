@@ -18,7 +18,7 @@ export const Username = styled.div`
 `;
 
 export const DropdownIcon = styled(SortDown)`
-  color: #292b32;
+  fill: #292b32;
   cursor: pointer;
   margin-bottom: 2px;
 `;

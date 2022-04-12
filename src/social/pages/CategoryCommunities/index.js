@@ -21,7 +21,7 @@ const CategoryCommunitiesPage = ({ categoryId }) => {
     <PageContainer>
       <Header>
         <BackButton onClick={onBack}>
-          <ArrowLeft />
+          <ArrowLeft height={14} />
         </BackButton>
         <Title>{title}</Title>
       </Header>

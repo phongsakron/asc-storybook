@@ -1,18 +1,15 @@
 import styled from 'styled-components';
 import { Check, ExclamationCircle, Remove } from '~/icons';
 
-export const SuccessIcon = styled(Check)`
-  font-size: 18px;
+export const SuccessIcon = styled(Check).attrs({ width: 18, height: 18 })`
   margin-right: 8px;
 `;
 
-export const InfoIcon = styled(ExclamationCircle)`
-  font-size: 18px;
+export const InfoIcon = styled(ExclamationCircle).attrs({ width: 18, height: 18 })`
   margin-right: 8px;
 `;
 
-export const ErrorIcon = styled(Remove)`
-  font-size: 18px;
+export const ErrorIcon = styled(Remove).attrs({ width: 18, height: 18 })`
   margin-right: 8px;
 `;
 

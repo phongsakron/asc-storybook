@@ -1,9 +1,7 @@
 import styled from 'styled-components';
 import { CreateChat } from '~/icons';
 
-export const CreateNewChatIcon = styled(CreateChat)`
-  width: 24px !important;
-  font-size: 18px;
+export const CreateNewChatIcon = styled(CreateChat).attrs({ width: 24, height: 18 })`
   cursor: pointer;
 `;
 

@@ -46,8 +46,8 @@ export const FileIcon = styled(Icon)`
   grid-area: icon;
 `;
 
-export const CircleIcon = styled(ExclamationCircle)`
-  color: ${({ theme }) => theme.palette.alert.main};
+export const CircleIcon = styled(ExclamationCircle).attrs({ width: 14, height: 14 })`
+  fill: ${({ theme }) => theme.palette.alert.main};
   z-index: 2;
 `;
 

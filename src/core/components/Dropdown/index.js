@@ -17,7 +17,7 @@ const SCROLLABLE_HEIGHT = 200;
 const triggerRenderer = (props) => {
   return (
     <Button {...props}>
-      <ChevronDown />
+      <ChevronDown height={14} width={14} />
     </Button>
   );
 };
@@ -61,6 +61,7 @@ const Dropdown = ({
       parentContainer &&
       `0px 0px -${Math.ceil(
         (scrollableHeight * 100) /
+          // eslint-disable-next-line no-unsafe-optional-chaining
           (parentContainer?.getBoundingClientRect()?.height - buttonContainerHeight),
       )}% 0px`,
   });

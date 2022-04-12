@@ -11,8 +11,7 @@ import EmptyState from '~/core/components/EmptyState';
 import Button from '~/core/components/Button';
 import { NewspaperLight, Search } from '~/icons';
 
-const FeedIcon = styled(NewspaperLight)`
-  font-size: 48px;
+const FeedIcon = styled(NewspaperLight).attrs({ width: 48, height: 48 })`
   margin: 10px;
 `;
 
@@ -21,8 +20,7 @@ const ExploreLink = styled(Button)`
   margin-top: 8px;
 `;
 
-const SearchIcon = styled(Search)`
-  font-size: 16px;
+const SearchIcon = styled(Search).attrs({ width: 16, height: 16 })`
   margin-right: 6px;
 `;
 

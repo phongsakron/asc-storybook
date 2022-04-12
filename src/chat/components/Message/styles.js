@@ -35,9 +35,8 @@ export const CloseIcon = styled(Close)`
   cursor: pointer;
 `;
 
-export const MessageOptionsIcon = styled(EllipsisV)`
+export const MessageOptionsIcon = styled(EllipsisV).attrs({ width: 11, height: 11 })`
   opacity: 0.5;
-  font-size: 11px;
   margin: 0 5px;
   cursor: pointer;
 `;
