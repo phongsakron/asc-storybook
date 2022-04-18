@@ -7,6 +7,7 @@ export const PageTypes = {
   CommunityFeed: 'communityfeed',
   CommunityEdit: 'communityedit',
   UserEdit: 'useredit',
+  Post: 'post',
 };
 
 export const PageTypesToTitle = {
@@ -17,6 +18,7 @@ export const PageTypesToTitle = {
   [PageTypes.CommunityFeed]: 'Community Feed',
   [PageTypes.CommunityEdit]: 'Community Edit',
   [PageTypes.UserEdit]: 'User Edit',
+  [PageTypes.Post]: 'Post',
 };
 
 export const MemberRoles = Object.freeze({

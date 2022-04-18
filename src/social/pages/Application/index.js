@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import styled from 'styled-components';
 
 import { PageTypes, PageTypesToTitle } from '~/social/constants';
@@ -19,6 +19,8 @@ import ProfileSettings from '~/social/components/ProfileSettings';
 import CategoriesList from '~/social/pages/CategoriesList';
 
 import { useNavigation } from '~/social/providers/NavigationProvider';
+import { useSDK } from '~/core/hocs/withSDK';
+import PostDetail from '~/social/pages/PostDetail';
 
 const ApplicationContainer = styled.div`
   height: 100%;
@@ -65,7 +67,7 @@ const ContentsLayout = styled.div`
 `;
 
 const Community = () => {
-  const { page } = useNavigation();
+  const { page, onChangePage } = useNavigation();
   const [isShowHeader, setIsShowHeader] = useState(true);
   const [asidePage, setAsidePage] = useState('Explore');
   const [isShowAside, setIsShowAside] = useState(false);
@@ -86,6 +88,21 @@ const Community = () => {
     setIsShowAside(false);
     return page.type;
   }, [page]);
+
+  const { connected } = useSDK();
+  useEffect(() => {
+    const url = window.location.href;
+    const urlParams = new URLSearchParams(url.split('?')[1]);
+    const type = urlParams.get('type');
+    const userId = urlParams.get('userId');
+    const communityId = urlParams.get('communityId');
+    const categoryId = urlParams.get('categoryId');
+    const postId = urlParams.get('postId');
+    if (type && connected) {
+      onChangePage({ type, userId, communityId, categoryId, postId });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [connected]);
 
   return (
     <ApplicationContainer id="app">
@@ -146,6 +163,7 @@ const Community = () => {
           {currPage === PageTypes.UserFeed && <UserFeedPage userId={page.userId} />}
 
           {currPage === PageTypes.UserEdit && <ProfileSettings userId={page.userId} />}
+          {currPage === PageTypes.Post && <PostDetail postId={page.postId} />}
         </ContentsLayout>
       </MainLayout>
     </ApplicationContainer>

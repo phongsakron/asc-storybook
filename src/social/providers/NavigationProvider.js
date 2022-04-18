@@ -94,10 +94,14 @@ export default ({
   }, [onChangePageProp, confirmPageChange]);
 
   const handleChangePage = useCallback(
-    (type) => {
-      if (onChangePage) return onChangePage({ type });
-
-      pushPage({ type });
+    (next) => {
+      if (typeof next === 'string') {
+        if (onChangePage) return onChangePage({ type: next });
+        pushPage({ type: next });
+      } else {
+        if (onChangePage) return onChangePage(next);
+        pushPage(next);
+      }
     },
     [onChangePage, pushPage],
   );
