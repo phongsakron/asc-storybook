@@ -55,7 +55,7 @@ const CommunityFeed = ({ communityId, currentUserId, isNewCommunity }) => {
   }, [activeTab, tabs]);
 
   const isJoined = !!community?.isJoined;
-  const isCanSeeContent = community?.isPublic ? true : isJoined;
+  const isCanSeeContent = community?.isPublic || isJoined;
   const [isCreatedModalOpened, setCreatedModalOpened] = useState(isNewCommunity);
 
   document.getElementById('main').children[0].scrollTop = 0;
