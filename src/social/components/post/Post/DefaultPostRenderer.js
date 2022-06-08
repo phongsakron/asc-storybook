@@ -166,6 +166,13 @@ const DefaultPostRenderer = ({
     (child) => child.dataType === PostDataType.LivestreamPost,
   );
 
+  const isJoined = community?.isJoined;
+  const isCanSeeContent = community?.isPublic || isJoined;
+
+  if (Object.keys(community).length !== 0 && !isCanSeeContent && !loading) {
+    return <FormattedMessage id="community.noAccess" />;
+  }
+
   return (
     <PostContainer className={className}>
       <PostHeadContainer>
